@@ -1,0 +1,35 @@
+{
+	"application": {
+		"title": "Example application",
+		"theme": "bootswatch-cosmo",
+
+		"free_zone": {
+			"pages": [
+				{ 
+					"name": "home", 
+					"title": "Plugins example",
+					"components": [
+						{
+							"name": "plugin_one",
+							"type": "example1"
+						},
+						{
+							"name": "plugin_two",
+							"type": "example2"
+						}
+					]
+				}
+			],
+
+			"menus": [
+				{ 
+					"name": "main_menu",
+                   	"class": "nav navbar-nav",
+					"items": [
+						{ "title": "Home page", "route": "home" }
+					]
+				}
+			]			
+		}
+	}
+}

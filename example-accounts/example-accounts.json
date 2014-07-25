@@ -1,0 +1,81 @@
+{
+	"application": {
+		"title": "Example application",
+		"theme": "bootswatch-amelia",
+
+		"collections": [
+		],
+
+		"public_zone": {
+			"pages": [
+				{ 
+					"name": "home_public", 
+					"title": "", 
+					"components": [
+						{
+							"name": "home_jumbotron",
+							"title": "Example application",
+							"type": "jumbotron",
+							"text": "<b>This <a href=\"https://www.meteor.com\" target=\"_blank\">Meteor</a> application is made with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">meteor-kitchen</a> without manual coding.</b><br />It demonstrates how to create application with login, register and forgot password functions.",
+							"button_title": "Continue &raquo;",
+							"button_route": "login"
+						}
+					]
+				},
+				{ "name": "login", "template": "login.html" },
+				{ "name": "register", "template": "register.html" },
+				{ "name": "forgot_password", "template": "forgot_password.html" },
+				{ "name": "reset_password", "template": "reset_password.html" }
+			],
+
+			"menus": [
+				{
+					"name": "left_menu",
+					"class": "nav navbar-nav",
+					"dest_selector": "#menu",
+					"items": [
+						{ "title": "Home", "route": "home_public" }
+					]
+				},
+
+				{
+					"name": "right_menu",
+					"class": "nav navbar-nav navbar-right",
+					"dest_selector": "#menu",
+					"items": [
+						{ "title": "Register", "route": "register" },
+						{ "title": "Login", "route": "login" }
+					]
+				}
+			]
+		},
+
+		"private_zone": {
+			"pages": [
+				{ "name": "home_private", "title": "Welcome {{userFullName}}!" },
+				{ "name": "customers", "title": "Customers" },
+				{ "name": "logout", "template": "logout.html", "action_code": "App.logout();" }
+			],
+
+			"menus": [
+				{
+					"name": "left_menu",
+					"class": "nav navbar-nav",
+					"dest_selector": "#menu",
+					"items": [
+						{ "title": "Home", "route": "home_private" },
+						{ "title": "Customers", "route": "customers" }
+					]
+				},
+				{
+					"name": "right_menu",
+					"class": "nav navbar-nav navbar-right",
+					"dest_selector": "#menu",
+					"items": [
+						{ "title": "Logout", "route": "logout" }
+					]
+				}
+			]
+		}
+	}
+}
