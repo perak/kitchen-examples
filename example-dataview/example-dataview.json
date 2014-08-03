@@ -2,6 +2,7 @@
     "application": {
 
         "title": "Example application",
+		"description": "Meteor Kitchen - example application",
         "theme": "bootswatch-darkly",
 
         "collections": [
@@ -10,7 +11,8 @@
         		"fields": [
 					{ "name": "name", "title": "Name", "required": true },
 					{ "name": "phone", "title": "Phone", "default": "-" },
-					{ "name": "email", "title": "E-mail", "type": "email" }
+					{ "name": "email", "title": "E-mail", "type": "email" },
+					{ "name": "note", "title": "Note", "input": "textarea" }
         		]
         	}
         ],

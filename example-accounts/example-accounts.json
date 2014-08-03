@@ -1,6 +1,7 @@
 {
 	"application": {
 		"title": "Example application",
+		"description": "Meteor Kitchen - example application",
 		"theme": "bootswatch-amelia",
 
 		"collections": [

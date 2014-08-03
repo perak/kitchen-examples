@@ -2,6 +2,7 @@
     "application": {
 
         "title": "Example application",
+		"description": "Meteor Kitchen - example application",
         "theme": "bootswatch-simplex",
 
         "free_zone": {
