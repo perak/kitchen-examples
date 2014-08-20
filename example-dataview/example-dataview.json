@@ -28,7 +28,7 @@
                 			"name": "home_jumbotron",
                 			"title": "Example application",
                 			"type": "jumbotron",
-                			"text": "<b>This <a href=\"https://www.meteor.com\" target=\"_blank\">Meteor</a> application is made with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">meteor-kitchen</a> without manual coding.</b><br />It demonstrates how to use DataView and Form components to create simple database application with view, search, insert, edit and delete functions.",
+                			"text": "<b>This <a href=\"https://www.meteor.com\" target=\"_blank\">Meteor</a> application is made with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">meteor-kitchen</a> without manual coding.</b><br />It demonstrates how to use DataView and Form components to create simple database application with view, search, insert, edit and delete functions.<br />Source code (input file for generator) is <a href=\"https://github.com/perak/kitchen-examples/tree/master/example-dataview\" target=\"_blank\">here</a>.",
                 			"button_title": "Continue &raquo;",
                 			"button_route": "customers"
                 		}
