@@ -1,7 +1,8 @@
 {
 	"application": {
 		"title": "Example application",
-		"description": "Meteor Kitchen - example application",
+		"meta_title": "Example application",
+		"meta_description": "Meteor Kitchen - example application",
 		"theme": "bootswatch-flatly",
 
 		"collections": [
