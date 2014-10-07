@@ -92,7 +92,8 @@
 		                				"collection": "customers",
 		                				"filter": { "_id": ":customerId" }
 		                			},
-									"close_route": "customers"
+									"close_route": "customers",
+									"back_route": "customers"
 		                		}
 		                	]
 		                },
