@@ -10,10 +10,10 @@
         	{
         		"name": "customers",
         		"fields": [
-					{ "name": "name", "title": "Name", "required": true },
-					{ "name": "phone", "title": "Phone", "default": "-" },
-					{ "name": "email", "title": "E-mail", "type": "email" },
-					{ "name": "note", "title": "Note", "input": "textarea" }
+					{ "name": "name", "title": "Name", "required": true, "exportable": true },
+					{ "name": "phone", "title": "Phone", "default": "-", "exportable": true },
+					{ "name": "email", "title": "E-mail", "type": "email", "exportable": true },
+					{ "name": "note", "title": "Note", "input": "textarea", "exportable": true }
         		]
         	}
         ],
