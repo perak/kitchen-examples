@@ -1,7 +1,7 @@
 Invoices example
 ================
 
-This simple invoicing application shows how to use collections, dataviews and forms.
+This simple invoicing application shows how to work with DataViews, Forms with dates and lookup fields, master-detail relations etc.
 
 To run example, inside this directory type:
 
