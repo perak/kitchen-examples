@@ -13,11 +13,13 @@
 					"components": [
 						{
 							"name": "plugin_one",
-							"type": "example1"
+							"type": "example1",
+							"properties": { "anything": "here" }
 						},
 						{
 							"name": "plugin_two",
-							"type": "example2"
+							"type": "example2",
+							"properties": { "anything": "here" }
 						}
 					]
 				}
