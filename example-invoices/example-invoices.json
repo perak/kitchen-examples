@@ -5,13 +5,7 @@
 		"meta_description": "Meteor Kitchen - example application",
 		"theme": "bootswatch-paper",
 
-		"on_user_created_code": "
-			Customers.insert({
-				name: 'Chuck Norris',
-				email: 'internet@chucknorris.com',
-				ownerId: user._id
-			});
-		",
+		"on_user_created_code": "Customers.insert({ name: 'Chuck Norris', email: 'internet@chucknorris.com', ownerId: user._id });",
 
 		"collections": [
 			{
@@ -27,9 +21,7 @@
 				"read_owner_only": true,
 				"write_owner_only": true,
 
-				"before_insert_code": "
-					if(!doc.totalAmount) doc.totalAmount = 0;
-				"
+				"before_insert_code": "if(!doc.totalAmount) doc.totalAmount = 0;"
 			},
 
 			{
@@ -77,9 +69,7 @@
 				"read_owner_only": true,
 				"write_owner_only": true,
 
-				"before_insert_code": "
-					if(!doc.totalAmount) doc.totalAmount = 0;
-				"
+				"before_insert_code": "if(!doc.totalAmount) doc.totalAmount = 0;"
 			},
 
 			{
@@ -94,40 +84,15 @@
 				"read_owner_only": true,
 				"write_owner_only": true,
 
-				"before_insert_code": "
-					doc.amount = doc.quantity * doc.price;
-				",
+				"before_insert_code": "doc.amount = doc.quantity * doc.price;",
 
-				"before_update_code": "
-					if(!modifier.$set) return;
-					var quantity = modifier.$set.quantity || doc.quantity;
-					var price = modifier.$set.price || doc.price;
-					modifier.$set.amount = quantity * price;
-				",
+				"before_update_code": "if(!modifier.$set) return; var quantity = modifier.$set.quantity || doc.quantity; var price = modifier.$set.price || doc.price; modifier.$set.amount = quantity * price;",
 
-				"after_insert_code": "
-					var sum = 0;
-					InvoiceItems.find({ invoiceId: doc.invoiceId }).map(function(item) {
-						sum += item.amount;
-					});
-					Invoices.update({ _id: doc.invoiceId }, { $set: { totalAmount: sum }});
-				",
+				"after_insert_code": "var sum = 0; InvoiceItems.find({ invoiceId: doc.invoiceId }).map(function(item) { sum += item.amount; }); Invoices.update({ _id: doc.invoiceId }, { $set: { totalAmount: sum }});",
 
-				"after_update_code": "
-					var sum = 0;
-					InvoiceItems.find({ invoiceId: doc.invoiceId }).map(function(item) {
-						sum += item.amount;
-					});
-					Invoices.update({ _id: doc.invoiceId }, { $set: { totalAmount: sum }});
-				",
+				"after_update_code": "var sum = 0; InvoiceItems.find({ invoiceId: doc.invoiceId }).map(function(item) { sum += item.amount; }); Invoices.update({ _id: doc.invoiceId }, { $set: { totalAmount: sum }});",
 
-				"after_remove_code": "
-					var sum = 0;
-					InvoiceItems.find({ invoiceId: doc.invoiceId }).map(function(item) {
-						sum += item.amount;
-					});
-					Invoices.update({ _id: doc.invoiceId }, { $set: { totalAmount: sum }});
-				"
+				"after_remove_code": "var sum = 0; InvoiceItems.find({ invoiceId: doc.invoiceId }).map(function(item) { sum += item.amount; }); Invoices.update({ _id: doc.invoiceId }, { $set: { totalAmount: sum }});"
 			}
 		],
 
@@ -196,14 +161,7 @@
 								"collection": "customers",
 								"filter": {},
 								"options": {
-									"transform": "function(doc) {
-										var sum = 0;
-										Invoices.find({ customerId: doc._id }).map(function(item) {
-											sum += item.totalAmount;
-										});
-										doc.totalAmount = sum;
-										return doc;
-									}"
+									"transform": "function(doc) { var sum = 0; Invoices.find({ customerId: doc._id }).map(function(item) { sum += item.totalAmount; }); doc.totalAmount = sum; return doc; }"
 								}
 							},
 							"insert_route": "customers.insert",
@@ -259,14 +217,7 @@
 										"collection": "customers",
 										"filter": { "_id": ":customerId" },
 										"options": {
-											"transform": "function(doc) {
-												var sum = 0;
-												Invoices.find({ customerId: doc._id }).map(function(item) {
-													sum += item.totalAmount;
-												});
-												doc.totalAmount = sum;
-												return doc;
-											}"
+											"transform": "function(doc) { var sum = 0; Invoices.find({ customerId: doc._id }).map(function(item) { sum += item.totalAmount; }); doc.totalAmount = sum; return doc; }"
 										}
 									},
 									"close_route": "customers",
@@ -310,11 +261,7 @@
 								"collection": "invoices",
 								"filter": {},
 								"options": {
-									"transform": "function(doc) {
-										var customer = Customers.findOne({_id: doc.customerId });
-										if(customer) doc.customerName = customer.name;
-										return doc;
-									}",
+									"transform": "function(doc) { var customer = Customers.findOne({_id: doc.customerId }); if(customer) doc.customerName = customer.name; return doc; }",
 									"sort": { "invoiceNumber": -1 }
 								}
 							},
@@ -378,11 +325,7 @@
 										"collection": "invoices",
 										"filter": { "_id": ":invoiceId" },
 										"options": {
-											"transform": "function(doc) {
-												var customer = Customers.findOne({_id: doc.customerId });
-												if(customer) doc.customerName = customer.name;
-												return doc;
-											}"
+											"transform": "function(doc) { var customer = Customers.findOne({_id: doc.customerId }); if(customer) doc.customerName = customer.name; return doc; }"
 										}
 									},
 									"back_route": "invoices"
@@ -482,7 +425,7 @@
 									"collection": "customers",
 									"filter": {}
 								}
-							],
+							]
 						},
 
 						{
