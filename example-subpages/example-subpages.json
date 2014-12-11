@@ -73,7 +73,7 @@
                         	],
 		                    "menus": [
 							    {
-								    "name": "side_menu",
+								    "name": "tab_menu",
 								    "class": "nav nav-tabs",
 								    "items": [
 									    { "title": "Sub-Page B-1", "route": "cool_page.sub_page_b.sub_page_b_1" },
