@@ -13,7 +13,7 @@ cd ./example-admin
 meteor
 ```
 
-To use the **YAML** example you'll need to have <a href="https://www.npmjs.com/package/json2yaml">json2yaml</a> converter installed.
+To use the **YAML** example you'll need to have <a href="https://www.npmjs.com/package/json2yaml" target="_blank">json2yaml</a> converter installed.
 
 
 When you start the application and register, your user account will have role "user" by default and you will not see admin panel. 

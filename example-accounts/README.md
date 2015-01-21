@@ -14,6 +14,6 @@ cd ./example-accounts
 meteor
 ```
 
-To use the **YAML** example you'll need to have <a href="https://www.npmjs.com/package/json2yaml">json2yaml</a> converter installed.
+To use the **YAML** example you'll need to have <a href="https://www.npmjs.com/package/json2yaml" target="_blank">json2yaml</a> converter installed.
 
 You can see live example <a href="http://generator-accounts.meteor.com" target="_blank">here</a>.
