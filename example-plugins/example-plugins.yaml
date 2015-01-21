@@ -1,25 +1,30 @@
 ---
-application:
-  title: "Example application"
-  meta_title: "Example application"
-  meta_description: "Meteor Kitchen - example application"
-  theme: "bootswatch-cosmo"
-  free_zone:
-    pages:
-      - name: "home"
-        title: "Plugins example"
-        components:
-          - name: "plugin_one"
-            type: "example1"
-            properties:
-              anything: "here"
-          - name: "plugin_two"
-            type: "example2"
-            properties:
-              anything: "here"
-    menus:
-      - name: "main_menu"
-        class: "nav navbar-nav"
-        items:
-          - title: "Home page"
-            route: "home"
+  application:
+    title: Example application
+    meta_title: Example application
+    meta_description: Meteor Kitchen - example application
+    theme: bootswatch-cosmo
+    free_zone:
+      pages:
+        -
+          name: home
+          title: Plugins example
+          components:
+            -
+              name: plugin_one
+              type: example1
+              properties:
+                anything: here
+            -
+              name: plugin_two
+              type: example2
+              properties:
+                anything: here
+      menus:
+        -
+          name: main_menu
+          class: nav navbar-nav
+          items:
+            -
+              title: Home page
+              route: home

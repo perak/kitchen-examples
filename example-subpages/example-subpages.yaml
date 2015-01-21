@@ -1,70 +1,89 @@
 ---
-application:
-  title: "Example application"
-  meta_title: "Example application"
-  meta_description: "Meteor Kitchen - example application"
-  theme: "bootswatch-simplex"
-  free_zone:
-    pages:
-      - name: "home"
-        title: ""
-        components:
-          - name: "home_jumbotron"
-            title: "Example application"
-            type: "jumbotron"
-            text: >
-              "<b>This <a href=\"https://www.meteor.com\" target=\"_blank\">Meteor</a> application is made with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">meteor-kitchen</a> without manual coding.</b><br />It demonstrates how to create pages with side-menus and tab-menus pointing to subpages.<br />Source code (input file for generator) is <a href=\"https://github.com/perak/kitchen-examples/tree/master/example-subpages\" target=\"_blank\">here</a>."
-            button_title: "Continue &raquo;"
-            button_route: "cool_page"
-      - name: "cool_page"
-        pages:
-          - name: "sub_page_a"
-            title: "Sub-page A"
-            components:
-              - name: "lorem_ipsum"
-                type: "markdown"
-                source_file: "files/lorem_ipsum1.md"
-          - name: "sub_page_b"
-            title: "Sub-page B"
-            components:
-              - name: "lorem_ipsum"
-                type: "markdown"
-                source_file: "files/lorem_ipsum2.md"
-            pages:
-              - name: "sub_page_b_1"
-                title: "Sub-page B-1"
-                components:
-                  - name: "lorem_ipsum"
-                    type: "markdown"
-                    source_file: "files/lorem_ipsum3.md"
-              - name: "sub_page_b_2"
-                title: "Sub-page B-2"
-                components:
-                  - name: "lorem_ipsum"
-                    type: "markdown"
-                    source_file: "files/lorem_ipsum4.md"
-            menus:
-              - name: "tab_menu"
-                class: "nav nav-tabs"
-                items:
-                  - title: "Sub-Page B-1"
-                    route: "cool_page.sub_page_b.sub_page_b_1"
-                  - title: "Sub-Page B-2"
-                    route: "cool_page.sub_page_b.sub_page_b_2"
-        menus:
-          - name: "side_menu"
-            class: "nav nav-pills nav-stacked"
-            items:
-              - title: "Sub-Page A"
-                route: "cool_page.sub_page_a"
-              - title: "Sub-Page B"
-                route: "cool_page.sub_page_b"
-    menus:
-      - name: "main_menu"
-        class: "nav navbar-nav"
-        dest_selector: "#menu"
-        items:
-          - title: "Home page"
-            route: "home"
-          - title: "Cool page"
-            route: "cool_page"
+  application:
+    title: Example application
+    meta_title: Example application
+    meta_description: Meteor Kitchen - example application
+    theme: bootswatch-simplex
+    free_zone:
+      pages:
+        -
+          name: home
+          title: ""
+          components:
+            -
+              name: home_jumbotron
+              title: Example application
+              type: jumbotron
+              text: <b>This <a href="https://www.meteor.com" target="_blank">Meteor</a> application is made with <a href="http://www.meteorkitchen.com" target="_blank">meteor-kitchen</a> without manual coding.</b><br />It demonstrates how to create pages with side-menus and tab-menus pointing to subpages.<br />Source code (input file for generator) is <a href="https://github.com/perak/kitchen-examples/tree/master/example-subpages" target="_blank">here</a>.
+              button_title: Continue &raquo;
+              button_route: cool_page
+        -
+          name: cool_page
+          pages:
+            -
+              name: sub_page_a
+              title: Sub-page A
+              components:
+                -
+                  name: lorem_ipsum
+                  type: markdown
+                  source_file: files/lorem_ipsum1.md
+            -
+              name: sub_page_b
+              title: Sub-page B
+              components:
+                -
+                  name: lorem_ipsum
+                  type: markdown
+                  source_file: files/lorem_ipsum2.md
+              pages:
+                -
+                  name: sub_page_b_1
+                  title: Sub-page B-1
+                  components:
+                    -
+                      name: lorem_ipsum
+                      type: markdown
+                      source_file: files/lorem_ipsum3.md
+                -
+                  name: sub_page_b_2
+                  title: Sub-page B-2
+                  components:
+                    -
+                      name: lorem_ipsum
+                      type: markdown
+                      source_file: files/lorem_ipsum4.md
+              menus:
+                -
+                  name: tab_menu
+                  class: nav nav-tabs
+                  items:
+                    -
+                      title: Sub-Page B-1
+                      route: cool_page.sub_page_b.sub_page_b_1
+                    -
+                      title: Sub-Page B-2
+                      route: cool_page.sub_page_b.sub_page_b_2
+          menus:
+            -
+              name: side_menu
+              class: nav nav-pills nav-stacked
+              items:
+                -
+                  title: Sub-Page A
+                  route: cool_page.sub_page_a
+                -
+                  title: Sub-Page B
+                  route: cool_page.sub_page_b
+      menus:
+        -
+          name: main_menu
+          class: nav navbar-nav
+          dest_selector: "#menu"
+          items:
+            -
+              title: Home page
+              route: home
+            -
+              title: Cool page
+              route: cool_page
