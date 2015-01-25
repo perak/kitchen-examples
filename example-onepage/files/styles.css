@@ -1,0 +1,30 @@
+section {
+	padding: 0 0 80px 0;
+}
+
+section a {
+	color: #ff7518;
+}
+
+section.welcome {
+	text-align: center;
+}
+
+section.welcome h1 {
+	font-size: 56px;
+}
+
+section.bg-blue {
+	color: #fff;
+	background-color: #337ab7;	
+}
+
+section h1 {
+	padding-top: 80px;
+	font-size: 48px;
+	font-weight: 700;
+}
+
+section .large-icon {
+	font-size: 72px;
+}

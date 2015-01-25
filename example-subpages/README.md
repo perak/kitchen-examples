@@ -13,6 +13,6 @@ cd ./example-subpages
 meteor
 ```
 
-To use the **YAML** example you'll need to have <a href="https://www.npmjs.com/package/json2yaml" target="_blank">json2yaml</a> converter installed.
+To use the **YAML** example you'll need to have <a href="https://www.npmjs.org/package/yaml2json" target="_blank">yaml2json</a> converter installed.
 
 You can see live example <a href="http://generator-subpages.meteor.com" target="_blank">here</a>.
