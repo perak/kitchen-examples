@@ -1,0 +1,116 @@
+---
+  application: 
+    title: "Example application"
+    footer_text: "Copyright &copy; Your Website 2015"
+    theme: "bootswatch-cosmo"
+    free_zone: 
+      pages: 
+        - 
+          name: "home"
+          components: 
+            - 
+              name: "section_welcome"
+              type: "custom_component"
+              custom_template: "files/section.html"
+              dest_position: "before"
+              class: "bg-blue welcome"
+              components: 
+                - 
+                  name: "content_welcome"
+                  type: "custom_component"
+                  custom_template: "files/section_welcome.html"
+            - 
+              name: "section1"
+              type: "custom_component"
+              custom_template: "files/section.html"
+              dest_position: "before"
+              components: 
+                - 
+                  name: "content1"
+                  type: "markdown"
+                  source_file: "files/section1.md"
+                - 
+                  name: "three_columns"
+                  type: "custom_component"
+                  custom_template: "files/three_columns.html"
+            - 
+              name: "section2"
+              type: "custom_component"
+              custom_template: "files/section.html"
+              dest_position: "before"
+              class: "bg-blue"
+              components: 
+                - 
+                  name: "content2"
+                  type: "markdown"
+                  source_file: "files/section2.md"
+            - 
+              name: "section3"
+              type: "custom_component"
+              custom_template: "files/section.html"
+              dest_position: "before"
+              components: 
+                - 
+                  name: "content3"
+                  type: "markdown"
+                  source_file: "files/section3.md"
+            - 
+              name: "section_contact"
+              type: "custom_component"
+              custom_template: "files/section.html"
+              dest_position: "before"
+              class: "bg-blue"
+              components: 
+                - 
+                  name: "content_contact"
+                  type: "markdown"
+                  source_file: "files/section_contact.md"
+                - 
+                  name: "contact"
+                  type: "form"
+                  mode: "insert"
+                  fields: 
+                    - 
+                      name: "name"
+                      title: "Your name"
+                      required: true
+                    - 
+                      name: "email"
+                      title: "Your e-mail"
+                      type: "email"
+                      required: true
+                    - 
+                      name: "message"
+                      title: "Message"
+                      input: "textarea"
+                      required: true
+                  submit_button_title: "Send"
+                  submit_code: "Meteor.call('sendMail', { from: values.email, to: values.email, subject: 'Message from ' + values.name, text: values.message }, function(e) {  if(e) errorAction(e.message); else submitAction('Your message is sent. Thank you for contacting us! :)'); } );"
+          template_rendered_code: "$('section').css('min-height', $(window).height() + 'px'); window.scrollTo(0, 0);"
+      menus: 
+        - 
+          name: "main_menu"
+          class: "nav navbar-nav pull-right"
+          scroll_spy_selector: "body"
+          items: 
+            - 
+              title: "Home"
+              url: "#section-welcome"
+              icon_class: "fa fa-home"
+            - 
+              title: "Section 1"
+              url: "#section1"
+            - 
+              title: "Section 2"
+              url: "#section2"
+            - 
+              title: "Section 3"
+              url: "#section3"
+            - 
+              title: "Contact"
+              url: "#section-contact"
+    copy_files: 
+      - 
+        source: "files/styles.css"
+        dest: "CLIENT_STYLES_DIR/styles.css"
+

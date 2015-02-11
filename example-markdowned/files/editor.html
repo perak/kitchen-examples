@@ -1,0 +1,13 @@
+<template name="TEMPLATE_NAME">
+	<div class="row row-editor">
+		<div class="col-md-6">
+			{{> CodeMirror id="markdown-editor" options=editorOptions reactiveVar="editorText"}}
+		</div>
+
+		<div class="col-md-6 full-height">
+{{#markdown}}
+{{editorText}}
+{{/markdown}}
+		</div>
+	</div>
+</template>
