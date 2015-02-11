@@ -1,0 +1,18 @@
+# Mac OS X Metadata
+.DS_Store
+._*
+
+# Windows Metadata
+Thumbs.db
+
+# Kitchen Examples
+# This assumes a user has tried the example with:
+#     meteor-kitchen example-accounts.json accounts
+# which will create the accounts folder.
+accounts
+admin
+dataview
+invoices
+minimal
+plugins
+subpages
