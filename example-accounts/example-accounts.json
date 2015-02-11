@@ -9,6 +9,8 @@
 		],
 
 		"public_zone": {
+			"navbar_class": "navbar-inverse navbar-fixed-top",
+
 			"pages": [
 				{ 
 					"name": "home_public", 
@@ -53,6 +55,8 @@
 		},
 
 		"private_zone": {
+			"navbar_class": "navbar-default navbar-fixed-top",
+
 			"pages": [
 				{ "name": "home_private", "title": "Welcome {{userFullName}}!" },
 
