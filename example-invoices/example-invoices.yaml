@@ -157,7 +157,7 @@
         -
           name: left_menu
           class: nav navbar-nav
-          dest_selector: #menu
+          dest_selector: "#menu"
           items:
             -
               title: Home
@@ -165,7 +165,7 @@
         -
           name: right_menu
           class: nav navbar-nav navbar-right
-          dest_selector: #menu
+          dest_selector: "#menu"
           items:
             -
               title: Register
@@ -497,7 +497,7 @@
         -
           name: left_menu
           class: nav navbar-nav
-          dest_selector: #menu
+          dest_selector: "#menu"
           items:
             -
               title: Home
@@ -511,7 +511,7 @@
         -
           name: right_menu
           class: nav navbar-nav navbar-right
-          dest_selector: #menu
+          dest_selector: "#menu"
           items:
             -
               title: "{{userEmail}}"
