@@ -75,8 +75,7 @@
 									"query": {
 										"name": "admin_users",
 										"collection": "users",
-										"filter": {},
-										"options": { "sort": { "\"profile.name\"": 1 } }
+										"filter": {}
 									},
 
 									"fields": [

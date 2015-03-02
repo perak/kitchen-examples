@@ -1,17 +1,20 @@
+.jumbotron {
+	text-align: center;
+	color: white;
+}
+
+.jumbotron h1 {
+	padding-top: 50px;
+	font-size: 72px;
+	font-weight: 700;
+}
+
+.jumbotron p a {
+	color: yellow;
+}
+
 section {
 	padding: 0 0 80px 0;
-}
-
-section a {
-	color: #ff7518;
-}
-
-section.welcome {
-	text-align: center;
-}
-
-section.welcome h1 {
-	font-size: 56px;
 }
 
 section.bg-blue {

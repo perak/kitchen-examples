@@ -12,24 +12,24 @@
 					"name": "home",
 					"components": [
 						{
-							"name": "section_welcome",
-							"type": "custom_component",
-							"custom_template": "files/section.html",
+							"name": "jumbotron",
+							"type": "jumbotron",
 							"dest_position": "before",
-							"class": "bg-blue welcome",
+
+							"image_url": "/images/jumbotron-bg.png",
+
 							"components": [
 								{
-									"name": "content_welcome",
+									"name": "jumbotron_content",
 									"type": "custom_component",
-									"custom_template": "files/section_welcome.html"
+									"custom_template": "files/jumbotron_content.html"
 								}
 							]
 						},
 
 						{
 							"name": "section1",
-							"type": "custom_component",
-							"custom_template": "files/section.html",
+							"type": "section",
 							"dest_position": "before",
 							"components": [
 								{
@@ -48,8 +48,7 @@
 
 						{
 							"name": "section2",
-							"type": "custom_component",
-							"custom_template": "files/section.html",
+							"type": "section",
 							"dest_position": "before",
 							"class": "bg-blue",
 							"components": [
@@ -63,8 +62,7 @@
 
 						{
 							"name": "section3",
-							"type": "custom_component",
-							"custom_template": "files/section.html",
+							"type": "section",
 							"dest_position": "before",
 							"components": [
 								{
@@ -77,8 +75,7 @@
 
 						{
 							"name": "section_contact",
-							"type": "custom_component",
-							"custom_template": "files/section.html",
+							"type": "section",
 							"dest_position": "before",
 							"class": "bg-blue",
 							"components": [
@@ -103,7 +100,7 @@
 						}
 					],
 
-					"template_rendered_code": "$('section').css('min-height', $(window).height() + 'px'); window.scrollTo(0, 0);"
+					"template_rendered_code": "$('section, .jumbotron').css('min-height', $(window).height() + 'px'); window.scrollTo(0, 0);"
 				}
 			],
 
@@ -125,7 +122,8 @@
 		},
 
 		"copy_files": [
-			{ "source": "files/styles.css", "dest": "CLIENT_STYLES_DIR/styles.css" }
+			{ "source": "files/styles.css", "dest": "CLIENT_STYLES_DIR/styles.css" },
+			{ "source": "files/jumbotron-bg.png", "dest": "PUBLIC_IMAGES_DIR/jumbotron-bg.png" }
 		]
 	}
 }

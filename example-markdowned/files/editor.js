@@ -24,7 +24,7 @@ Template.TEMPLATE_NAME.rendered = function() {
 	window.scrollTo(0, 0);
 
 	// initial text
-	Session.set("editorText", "# Markdowned\n\n## Markdown editor with live preview\n\nBuilt in few minutes with [Meteor Kitchen](http://www.meteorkitchen.com) - Code generator for Meteor.js\n\n**Enjoy! :)**\n\n");
+	Session.set("editorText", "# Markdowned\n\n### Markdown editor with live preview\n\nBuilt in few minutes with [Meteor Kitchen](http://www.meteorkitchen.com) - code generator for Meteor.js\n\n**Enjoy! :)**\n\n");
 }
 
 Template.TEMPLATE_NAME.events({
