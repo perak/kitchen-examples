@@ -3,9 +3,7 @@ Photosharing
 
 This is example application built with meteor-kitchen GUI.
 
-Video tutorial:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/p2bJc6IW7Nw" frameborder="0" allowfullscreen></iframe>
+See <a href="//www.youtube.com/watch?v=p2bJc6IW7Nw" target="_blank">video tutorial</a>
 
 To run example, inside this directory type:
 
