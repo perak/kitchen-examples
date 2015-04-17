@@ -7,7 +7,9 @@
 		"collections": [
 			{
 				"name": "notes",
-				"before_insert_code": "doc.name = Meteor.user() ? Meteor.user().profile.name : 'Anonymous'; return doc;"
+				"before_insert_code": "doc.name = Meteor.user() ? Meteor.user().profile.name : 'Anonymous'; return doc;",
+				"owner_field": "createdBy",
+				"write_owner_only": true
 			}
 		],
 		"public_zone": {
@@ -100,6 +102,11 @@
 						{
 							"title": "Home",
 							"route": "home_public"
+						},
+						{
+							"title": "Source",
+							"url": "https://github.com/perak/kitchen-examples/tree/master/example-photosharing",
+							"target": "_blank"
 						}
 					],
 					"type": "menu"
