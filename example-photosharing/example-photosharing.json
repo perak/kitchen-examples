@@ -9,7 +9,11 @@
 				"name": "notes",
 				"before_insert_code": "doc.name = Meteor.user() ? Meteor.user().profile.name : 'Anonymous'; return doc;",
 				"owner_field": "createdBy",
-				"write_owner_only": true
+
+				"roles_allowed_to_read": [],
+				"roles_allowed_to_insert": [],
+				"roles_allowed_to_update": ["owner"],
+				"roles_allowed_to_delete": ["owner"]
 			}
 		],
 		"public_zone": {
