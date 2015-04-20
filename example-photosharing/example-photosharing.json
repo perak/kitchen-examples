@@ -75,22 +75,22 @@
 				},
 				{
 					"name": "login",
-					"template": "login.html",
+					"template": "login",
 					"type": "page"
 				},
 				{
 					"name": "register",
-					"template": "register.html",
+					"template": "register",
 					"type": "page"
 				},
 				{
 					"name": "forgot_password",
-					"template": "forgot_password.html",
+					"template": "forgot_password",
 					"type": "page"
 				},
 				{
 					"name": "reset_password",
-					"template": "reset_password.html",
+					"template": "reset_password",
 					"route_params": [
 						"resetPasswordToken"
 					],
@@ -199,7 +199,7 @@
 						},
 						{
 							"name": "change_pass",
-							"template": "change_pass.html",
+							"template": "change_pass",
 							"type": "page"
 						}
 					],
@@ -224,7 +224,7 @@
 				},
 				{
 					"name": "logout",
-					"template": "logout.html",
+					"template": "logout",
 					"action_code": "App.logout();",
 					"type": "page"
 				}
