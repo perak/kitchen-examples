@@ -36,7 +36,7 @@
 						}
 					]
 				},
-				{ "name": "about", "title": "About", "text": "This example application is built with <a href=\"http://www.meteorkitchen.com\">Meteor Kitchen</a> - code generator for Meteor.js" }
+				{ "name": "about", "title": "About", "text": "This example application is built with <a href=\"http://www.meteorkitchen.com\">Meteor Kitchen</a> - code generator for Meteor.js<br />Source code (input file for generator) is <a href=\"https://github.com/perak/kitchen-examples/tree/master/example-iot\">here</a>." }
 			],
 
 			"menus": [
