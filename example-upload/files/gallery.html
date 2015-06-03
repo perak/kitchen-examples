@@ -1,0 +1,46 @@
+<template name="TEMPLATE_NAME">
+	<h2>
+		COMPONENT_TITLE
+		<button type="button" class="btn btn-success pull-right new-file">
+			<span class="fa fa-plus">
+			</span>
+			Add file
+		</button>
+	</h2>
+
+	<p>
+		This example application is built with <a href="http://www.meteorkitchen.com">Meteor Kitchen</a> - code generator for Meteor.js.
+		Source code is <a href="https://github.com/perak/kitchen-examples/tree/master/example-upload" target="_blank">here</a>
+	</p>
+
+	<hr />
+
+	{{#if QUERY_VAR}}
+		<div class="row">
+			{{#each QUERY_VAR}}
+				<div class="col-xs-12 col-sm-4 col-md-3" style="padding: 10px;">
+					<h4>
+						<a href="#" class="delete-file pull-right"><span class="fa fa-close"></span></a>
+						{{title}}
+					</h4>
+					{{#with file}}
+						{{#if isImage}}
+							<a href="{{url}}" target="_blank"><img src="{{url}}" width="100%"></a>
+						{{/if}}
+
+						{{#if isAudio}}
+							<audio src="{{url}}" width="100%" controls="controls"></audio>
+						{{/if}}
+
+						{{#if isVideo}}
+							<video src="{{url}}" width="100%" controls="controls"></video>
+						{{/if}}
+					{{/with}}
+				</div>
+			{{/each}}
+		</div>
+	{{else}}
+		<div class="alert alert-info">Gallery is empty :(</div>
+	{{/if}}
+
+</template>
