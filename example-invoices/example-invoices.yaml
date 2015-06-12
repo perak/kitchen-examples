@@ -492,7 +492,6 @@
         -
           name: logout
           template: logout.html
-          action_code: "App.logout();"
       menus:
         -
           name: left_menu

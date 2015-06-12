@@ -1,0 +1,15 @@
+<template name="TEMPLATE_NAME">
+	<h2>
+		COMPONENT_TITLE
+	</h2>
+	{{#if isFile}}
+		<div style="padding-bottom: 5px; width: 100%">
+			<button type="submit" class="btn btn-success file-save">
+				<span class="fa fa-save">
+				</span>
+				Save
+			</button>
+		</div>
+		{{> CodeMirror id="code-editor" options=editorOptions reactiveVar="editorText"}}
+	{{/if}}
+</template>

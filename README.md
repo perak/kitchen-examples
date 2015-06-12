@@ -8,4 +8,3 @@ Each example is given both in **JSON** and **YAML** formats.
 Meteor-kitchen natively supports input files written in **JSON**. To use the **YAML** example you'll need to have <a href="https://www.npmjs.org/package/yaml2json" target="_blank">yaml2json</a> converter installed. The following is the most common example of how to accomplish this:
 
     npm install -g yaml2json
-

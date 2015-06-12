@@ -219,14 +219,11 @@
 							],
 							"type": "menu"
 						}
-					],
-					"type": "page"
+					]
 				},
 				{
 					"name": "logout",
-					"template": "logout",
-					"action_code": "App.logout();",
-					"type": "page"
+					"template": "logout"
 				}
 			],
 			"menus": [
