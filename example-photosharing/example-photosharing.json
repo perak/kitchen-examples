@@ -1,6 +1,6 @@
 {
 	"application": {
-		"title": "Example Photosharing",
+		"title": "Photosharing",
 		"meta_title": "Example application",
 		"meta_description": "Meteor Kitchen - example application",
 		"theme": "bootswatch-paper",
@@ -16,22 +16,23 @@
 				"roles_allowed_to_delete": ["owner"]
 			}
 		],
-		"public_zone": {
-			"navbar_class": "navbar-inverse navbar-fixed-top",
+
+		"free_zone": {
 			"pages": [
 				{
-					"name": "home_public",
+					"name": "home_free",
+					"text": "<h5>Hey developer, programming all day (and night) long?</h5><h4>Show us your tired face! :)</h4>",
 					"components": [
 						{
 							"name": "photo_button",
 							"html": "<template name=\"TEMPLATE_NAME\">\n  <p style=\"margin: 20px 0;\">\n    <button type=\"button\" id=\"take-photo\" class=\"btn btn-danger\">\n      <span class=\"fa fa-camera\"></span>\n      Take a photo and share it!\n    </button>\n  </p>\n</template>\n",
-							"js": "var cameraOptions = {\n  width: 800,\n  height: 600\n};\n\n\nTemplate.TEMPLATE_NAME.events({\n  \"click #take-photo\": function(e, t) {\n    MeteorCamera.getPicture(cameraOptions, function (error, data) {\n      Session.set(\"photo\", data);\n      if (error) {\n      console.log(error);\n      } else {\n        Notes.insert({\n          photo: data\n        });\n      }  \n    });\n    \n  }\n});\n\n",
+							"js": "var cameraOptions = {\n  width: 800,\n  height: 600\n};\n\n\nTemplate.TEMPLATE_NAME.events({\n  \"click #take-photo\": function(e, t) {\n    MeteorCamera.getPicture(cameraOptions, function (error, data) {\n      Session.set(\"photo\", data);\n      if (error) {\n        // e.g. camera permission denied, or unsupported browser (Safari on iOS, looking at you)\n        console.log(error);\n      } else {\n        Notes.insert({\n          photo: data\n        });\n      }  \n    });\n    \n  }\n});\n\n",
 							"type": "custom_component"
 						},
 						{
 							"name": "form",
 							"mode": "insert",
-							"submit_route": "home_public",
+							"submit_route": "home_free",
 							"type": "form",
 							"query": {
 								"name": "notes_empty",
@@ -48,8 +49,8 @@
 									"name": "text",
 									"title": "Or enter a note:",
 									"type": "string",
-									"input": "textarea",
-									"required": true
+									"required": true,
+									"input": "textarea"
 								}
 							]
 						},
@@ -70,10 +71,14 @@
 								"params": []
 							}
 						}
-					],
-					"type": "page",
-					"zoneless": true
-				},
+					]
+				}
+			]
+		},
+
+		"public_zone": {
+			"navbar_class": "navbar-inverse navbar-fixed-top",
+			"pages": [
 				{
 					"name": "login",
 					"template": "login",
@@ -106,7 +111,7 @@
 					"items": [
 						{
 							"title": "Home",
-							"route": "home_public"
+							"route": "home_free"
 						},
 						{
 							"title": "Source",
@@ -235,7 +240,7 @@
 					"items": [
 						{
 							"title": "Home",
-							"route": "home_public"
+							"route": "home_free"
 						}
 					],
 					"type": "menu"
