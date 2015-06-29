@@ -12,9 +12,9 @@
 			"navbar_class": "navbar-inverse navbar-fixed-top",
 
 			"pages": [
-				{ 
-					"name": "home_public", 
-					"title": "", 
+				{
+					"name": "home_public",
+					"title": "",
 					"components": [
 						{
 							"name": "home_jumbotron",
@@ -122,7 +122,7 @@
 					"class": "nav navbar-nav navbar-right",
 					"dest_selector": "#menu",
 					"items": [
-						{ 
+						{
 							"title": "{{userEmail}}",
 							"items": [
 								{ "title": "Settings", "route": "user_settings" },
