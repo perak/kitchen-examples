@@ -3,8 +3,6 @@ Admin panel example
 
 This example will build meteor application with user account system and admin panel.
 
-**JSON** and **YAML** files are the same example in different formats.
-
 To generate and run application, inside this directory type:
 
 ```
@@ -13,10 +11,14 @@ cd ./example-admin
 meteor
 ```
 
-To use the **YAML** example you'll need to have <a href="https://www.npmjs.org/package/yaml2json" target="_blank">yaml2json</a> converter installed.
+**JSON** and **YAML** files are the same example in different formats.
+
+Meteor-kitchen natively supports input files written in **JSON**. To use the **YAML** example you'll need to have <a href="https://www.npmjs.com/package/yaml-js" target="_blank">js-yaml</a> converter installed. The following is the most common example of how to accomplish this:
+
+    npm install -g js-yaml
 
 
-When you start the application and register, your user account will have role "user" by default and you will not see admin panel. 
+When you start the application and register, your user account will have role "user" by default and you will not see admin panel.
 
 To create first admin, you first need to find your user ID. Open mongo shell and type:
 
@@ -41,4 +43,3 @@ This example has three user roles:
 - `blocked` user is blocked and cannot login
 
 That's it :)
-
