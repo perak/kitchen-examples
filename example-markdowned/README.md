@@ -1,15 +1,15 @@
-Minimal example
+Markdown Editor
 ===============
 
-This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build minimal meteor application with navbar and two pages.
+This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build meteor application - minimalistic markdown editor.
 
-You can see live example <a href="http://generator-minimal.meteor.com" target="_blank">here</a>.
+You can see live example <a href="http://generator-markdowned.meteor.com" target="_blank">here</a>.
 
 To build and run example, inside this directory type:
 
 ```
-meteor-kitchen ./example-minimal.json ./example-minimal
-cd ./example-minimal
+meteor-kitchen ./example-markdowned.json ./example-markdowned
+cd ./example-markdowned
 meteor
 ```
 

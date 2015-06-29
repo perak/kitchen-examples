@@ -81,26 +81,22 @@
 			"pages": [
 				{
 					"name": "login",
-					"template": "login",
-					"type": "page"
+					"template": "login"
 				},
 				{
 					"name": "register",
-					"template": "register",
-					"type": "page"
+					"template": "register"
 				},
 				{
 					"name": "forgot_password",
-					"template": "forgot_password",
-					"type": "page"
+					"template": "forgot_password"
 				},
 				{
 					"name": "reset_password",
 					"template": "reset_password",
 					"route_params": [
 						"resetPasswordToken"
-					],
-					"type": "page"
+					]
 				}
 			],
 			"menus": [
@@ -118,8 +114,7 @@
 							"url": "https://github.com/perak/kitchen-examples/tree/master/example-photosharing",
 							"target": "_blank"
 						}
-					],
-					"type": "menu"
+					]
 				},
 				{
 					"name": "right_menu",
@@ -134,12 +129,11 @@
 							"title": "Login",
 							"route": "login"
 						}
-					],
-					"type": "menu"
+					]
 				}
-			],
-			"type": "zone"
+			]
 		},
+
 		"private_zone": {
 			"navbar_class": "navbar-default navbar-fixed-top",
 			"pages": [
@@ -200,13 +194,11 @@
 										}
 									]
 								}
-							],
-							"type": "page"
+							]
 						},
 						{
 							"name": "change_pass",
-							"template": "change_pass",
-							"type": "page"
+							"template": "change_pass"
 						}
 					],
 					"menus": [
@@ -222,8 +214,7 @@
 									"title": "Change password",
 									"route": "user_settings.change_pass"
 								}
-							],
-							"type": "menu"
+							]
 						}
 					]
 				},
@@ -242,8 +233,7 @@
 							"title": "Home",
 							"route": "home_free"
 						}
-					],
-					"type": "menu"
+					]
 				},
 				{
 					"name": "right_menu",
@@ -263,11 +253,9 @@
 								}
 							]
 						}
-					],
-					"type": "menu"
+					]
 				}
-			],
-			"type": "zone"
+			]
 		},
 		"packages": {
 			"meteor": [

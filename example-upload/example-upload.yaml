@@ -1,0 +1,53 @@
+application:
+  collections:
+    - name: files
+      type: file_collection
+      storage_adapters:
+        - gridfs
+    - name: gallery
+      type: collection
+      fields:
+        - name: title
+          title: Title
+          required: true
+        - name: fileId
+          title: File
+          input: file
+          file_collection: files
+          file_container: file
+  free_zone:
+    pages:
+      - name: home
+        components:
+          - name: gallery
+            title: Example Gallery
+            type: custom_component
+            custom_template: files/gallery
+            query:
+              name: gallery
+              collection: gallery
+              filter: {}
+              options: {}
+        pages:
+          - name: insert
+            components:
+              - name: form
+                title: Add new file
+                type: form
+                mode: insert
+                query:
+                  name: gallery_empty
+                  collection: gallery
+                  filter:
+                    _id: null
+                  options: {}
+                submit_route: home
+                cancel_route: home
+    menus:
+      - name: main_menu
+        class: nav navbar-nav
+        items:
+          - title: Example gallery
+            route: home
+            icon_class: fa fa-home
+

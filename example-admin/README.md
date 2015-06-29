@@ -1,7 +1,7 @@
 Admin panel example
 ===================
 
-This example will build meteor application with user account system and admin panel.
+This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build meteor application with user account system and admin panel.
 
 To generate and run application, inside this directory type:
 
@@ -15,10 +15,11 @@ meteor
 
 Meteor-kitchen natively supports input files written in **JSON**. To use the **YAML** example you'll need to have <a href="https://www.npmjs.com/package/yaml-js" target="_blank">js-yaml</a> converter installed. The following is the most common example of how to accomplish this:
 
-    npm install -g js-yaml
+```
+npm install -g js-yaml
+```
 
-
-When you start the application and register, your user account will have role "user" by default and you will not see admin panel.
+When you start the application and register, your user account will have role "user" by default and you will not be able to see admin panel.
 
 To create first admin, you first need to find your user ID. Open mongo shell and type:
 

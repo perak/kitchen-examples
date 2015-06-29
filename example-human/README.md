@@ -5,7 +5,17 @@ Example application written in human language.
 
 This **experimental** feature is added to meteor-kitchen in version 0.9.43.
 
-To build and run example, inside this directory type:
+Stay tuned: more info will be added soon!
+
+You can see live example <a href="http://generator-geiger.meteor.com" target="_blank">here</a>.
+
+To build and run example you'l need <a href="https://www.npmjs.com/package/human2machine" target="_blank">human2machine</a> npm module to translate from everyday English to json:
+
+```
+npm -g install human2machine
+```
+
+And then inside this directory type:
 
 ```
 meteor-kitchen ./example-human.txt ./example-human
