@@ -1,0 +1,5 @@
+I want site with one page.
+Create one collection: sensors.
+In sensors collection I want fields: topic and message.
+Connect sensors collection to mosquitto server: "test.mosquitto.org" and subscribe to topic: revspace/sensors/#.
+In home page I want table showing sensors collection.
