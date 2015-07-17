@@ -32,7 +32,7 @@
 					}
 				],
 
-				"after_insert_code": "var newId = FileSystem.insert({ projectId: doc._id, filename: doc.name, type: 'dir', expanded: true }); FileSystem.insert({ projectId: doc._id, parentId: newId, filename: 'README.md', type: 'item', content: '# ' + doc.name + '\n\n' + doc.description + '\n' });"
+				"after_insert_code": "var newId = FileSystem.insert({ projectId: doc._id, filename: doc.name, type: 'dir', expanded: true }); FileSystem.insert({ projectId: doc._id, parentId: newId, filename: 'README.md', type: 'item', content: '# ' + doc.name + '\\n\\n' + doc.description + '\\n' });"
 			},
 			{
 				"name": "file_system",
