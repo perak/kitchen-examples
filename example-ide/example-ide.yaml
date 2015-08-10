@@ -78,6 +78,82 @@
         "after_remove_code": "FileSystem.remove({ parentId: doc._id });"
       }
     ],
+    "queries": [
+      {
+        "name": "projects",
+        "collection": "projects",
+        "filter": {},
+        "options": {}
+      },
+      {
+        "name": "project",
+        "collection": "projects",
+        "find_one": true,
+        "filter": {
+          "_id": ":projectId"
+        },
+        "options": {}
+      },
+      {
+        "name": "project_empty",
+        "collection": "projects",
+        "filter": {
+          "_id": null
+        },
+        "options": {},
+        "find_one": true
+      },
+      {
+        "name": "project_files",
+        "collection": "file_system",
+        "filter": {
+          "projectId": ":projectId"
+        },
+        "options": {
+          "sort": [
+            "filename"
+          ]
+        }
+      },
+      {
+        "name": "file",
+        "collection": "file_system",
+        "find_one": true,
+        "filter": {
+          "_id": ":fileId"
+        },
+        "options": {}
+      },
+      {
+        "name": "admin_users",
+        "collection": "users",
+        "filter": {}
+      },
+      {
+        "name": "admin_user",
+        "collection": "users",
+        "filter": {
+          "_id": ":userId"
+        },
+        "find_one": true
+      },
+      {
+        "name": "users_null",
+        "collection": "users",
+        "filter": {
+          "_id": null
+        },
+        "find_one": true
+      },
+      {
+        "name": "current_user_data",
+        "collection": "users",
+        "filter": {
+          "_id": "Meteor.userId()"
+        },
+        "find_one": true
+      }
+    ],
     "public_zone": {
       "pages": [
         {
@@ -115,9 +191,10 @@
           ]
         }
       ],
-      "menus": [
+      "components": [
         {
           "name": "left_menu",
+          "type": "menu",
           "class": "nav navbar-nav",
           "dest_selector": "#menu",
           "items": [
@@ -129,6 +206,7 @@
         },
         {
           "name": "right_menu",
+          "type": "menu",
           "class": "nav navbar-nav navbar-right",
           "dest_selector": "#menu",
           "items": [
@@ -153,12 +231,7 @@
               "name": "list",
               "title": "My projects",
               "type": "dataview",
-              "query": {
-                "name": "projects",
-                "collection": "projects",
-                "filter": {},
-                "options": {}
-              },
+              "query_name": "projects",
               "insert_route": "projects.insert",
               "details_route": "projects.main",
               "details_route_params": [
@@ -194,15 +267,7 @@
                 "projectId",
                 "fileId"
               ],
-              "query": {
-                "name": "project",
-                "collection": "projects",
-                "find_one": true,
-                "filter": {
-                  "_id": ":projectId"
-                },
-                "options": {}
-              },
+              "query_name": "project",
               "back_route": "projects",
               "pages": [
                 {
@@ -222,18 +287,7 @@
                       "name": "tree",
                       "type": "tree_view",
                       "dest_selector": ".sidebar",
-                      "query": {
-                        "name": "project_files",
-                        "collection": "file_system",
-                        "filter": {
-                          "projectId": ":projectId"
-                        },
-                        "options": {
-                          "sort": [
-                            "filename"
-                          ]
-                        }
-                      },
+                      "query_name": "project_files",
                       "item_name_field": "filename",
                       "item_type_field": "type",
                       "item_route": "projects.main.editor",
@@ -264,22 +318,15 @@
                       "type": "custom_component",
                       "title": "{{file.filename}}",
                       "custom_template": "files/main/main",
-                      "query": {
-                        "name": "file",
-                        "collection": "file_system",
-                        "find_one": true,
-                        "filter": {
-                          "_id": ":fileId"
-                        },
-                        "options": {}
-                      }
+                      "query_name": "file"
                     }
                   ]
                 }
               ],
-              "menus": [
+              "components": [
                 {
                   "name": "left_menu",
+                  "type": "menu",
                   "class": "nav navbar-nav",
                   "items": [
                     {
@@ -300,6 +347,7 @@
                 },
                 {
                   "name": "right_menu",
+                  "type": "menu",
                   "class": "nav navbar-nav navbar-right",
                   "items": []
                 }
@@ -313,14 +361,7 @@
                   "type": "form",
                   "mode": "insert",
                   "title": "New project",
-                  "query": {
-                    "name": "project_empty",
-                    "collection": "projects",
-                    "filter": {
-                      "_id": null
-                    },
-                    "options": {}
-                  },
+                  "query_name": "project_empty",
                   "submit_route": "projects.main",
                   "submit_route_params": [
                     {
@@ -347,14 +388,7 @@
                   "type": "form",
                   "mode": "update",
                   "title": "Edit project settings",
-                  "query": {
-                    "name": "project",
-                    "collection": "projects",
-                    "filter": {
-                      "_id": ":projectId"
-                    },
-                    "options": {}
-                  },
+                  "query_name": "project",
                   "submit_route": "projects",
                   "cancel_route": "projects"
                 }
@@ -376,11 +410,7 @@
                   "type": "data_view",
                   "title": "Users",
                   "text_if_empty": "No users yet",
-                  "query": {
-                    "name": "admin_users",
-                    "collection": "users",
-                    "filter": {}
-                  },
+                  "query_name": "admin_users",
                   "fields": [
                     {
                       "name": "profile.name",
@@ -424,13 +454,7 @@
                       "type": "form",
                       "mode": "read_only",
                       "title": "User details",
-                      "query": {
-                        "name": "admin_user",
-                        "collection": "users",
-                        "filter": {
-                          "_id": ":userId"
-                        }
-                      },
+                      "query_name": "admin_user",
                       "fields": [
                         {
                           "name": "profile.name",
@@ -461,13 +485,7 @@
                       "title": "Add new user",
                       "submit_route": "admin.users",
                       "cancel_route": "admin.users",
-                      "query": {
-                        "name": "users_null",
-                        "collection": "users",
-                        "filter": {
-                          "_id": null
-                        }
-                      },
+                      "query_name": "users_null",
                       "fields": [
                         {
                           "name": "profile.name",
@@ -503,13 +521,7 @@
                       "title": "Edit user",
                       "submit_route": "admin.users",
                       "cancel_route": "admin.users",
-                      "query": {
-                        "name": "admin_user",
-                        "collection": "users",
-                        "filter": {
-                          "_id": ":userId"
-                        }
-                      },
+                      "query_name": "admin_user",
                       "fields": [
                         {
                           "name": "profile.name",
@@ -549,9 +561,10 @@
               ]
             }
           ],
-          "menus": [
+          "components": [
             {
               "name": "side_menu",
+              "type": "menu",
               "class": "nav nav-stacked nav-pills",
               "items": [
                 {
@@ -578,14 +591,7 @@
                   "mode": "update",
                   "title": "Edit your profile",
                   "submit_route": "user_settings.profile",
-                  "query": {
-                    "name": "current_user_data",
-                    "collection": "users",
-                    "filter": {
-                      "_id": "Meteor.userId()"
-                    },
-                    "find_one": true
-                  },
+                  "query_name": "current_user_data",
                   "fields": [
                     {
                       "name": "profile.name",
@@ -607,9 +613,10 @@
               "template": "change_pass"
             }
           ],
-          "menus": [
+          "components": [
             {
               "name": "side_menu",
+              "type": "menu",
               "class": "nav nav-stacked nav-pills",
               "items": [
                 {
@@ -629,9 +636,10 @@
           "template": "logout"
         }
       ],
-      "menus": [
+      "components": [
         {
           "name": "left_menu",
+          "type": "menu",
           "class": "nav navbar-nav",
           "dest_selector": "#menu",
           "items": [
@@ -643,6 +651,7 @@
         },
         {
           "name": "right_menu",
+          "type": "menu",
           "class": "nav navbar-nav navbar-right",
           "dest_selector": "#menu",
           "items": [

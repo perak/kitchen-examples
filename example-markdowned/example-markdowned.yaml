@@ -10,9 +10,9 @@ application:
           - name: editor
             type: custom
             custom_template: files/editor
-    menus:
+    components:
       - name: main_menu
-        class: nav navbar-nav
+        type: menu
         items:
           - title: Home
             route: home

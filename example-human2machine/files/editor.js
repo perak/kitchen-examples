@@ -23,26 +23,35 @@ Template.TEMPLATE_NAME.rendered = function() {
 	setFullHeight();
 	window.scrollTo(0, 0);
 
-	// initial text
-	Session.set("editorText", "# Markdowned\n\n### Markdown editor with live preview\n\nBuilt in few minutes with [Meteor Kitchen](http://www.meteorkitchen.com) - code generator for Meteor.js\n\n**Enjoy! :)**\n\n");
-}
+	var app = this.data.application;
+
+	Session.set("humanEditorText", app.text);
+
+	this.autorun(function (tracker) {
+		var txt = Session.get("humanEditorText");
+		var obj = human2machine(txt);
+		Session.set("jsonEditorText", JSON.stringify(obj, null, "  "));
+		Applications.update({ _id: app._id }, { $set: { text: txt, json: obj } });
+	});
+};
 
 Template.TEMPLATE_NAME.events({
 });
 
 Template.TEMPLATE_NAME.helpers({
 	// codemirror options here
-	"editorOptions": function() {
-        return {
+	"humanEditorOptions": function() {
+		return {
             styleActiveLine: true,
-            lineNumbers: false,
-            styleActiveLine: true,
-            mode: "markdown"
-        }
+			lineNumbers: false
+		}
 	},
 
-	// codemirror initial text
-	"editorText": function() {
-		return Session.get("editorText");
+	"jsonEditorOptions": function() {
+		return {
+            styleActiveLine: true,
+			lineNumbers: false,
+			readOnly: true
+		}
 	}
 });

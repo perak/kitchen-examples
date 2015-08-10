@@ -1,7 +1,5 @@
 application:
   title: Example application
-  meta_title: Example application
-  meta_description: Meteor Kitchen - example application
   free_zone:
     pages:
       - name: home
@@ -9,10 +7,10 @@ application:
         text: 'Hello world!'
       - name: about
         title: About
-        text: 'This example application is built with <a href="http://www.meteorkitchen.com">Meteor Kitchen</a> - code generator for Meteor.js'
-    menus:
+        text: 'This example application is built with <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> - code generator for <a href="https://www.meteor.com" target="_blank">Meteor.js</a>'
+    components:
       - name: main_menu
-        class: nav navbar-nav
+        type: menu
         items:
           - title: Home page
             route: home

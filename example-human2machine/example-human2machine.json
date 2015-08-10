@@ -1,0 +1,104 @@
+{
+	"application": {
+		"title": "human2machine",
+		"theme": "bootswatch-superhero",
+
+		"footer_text": "<a href=\"https://www.npmjs.com/package/human2machine\" target=\"_blank\">human2machine</a> converter built with (and for) <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">Meteor Kitchen</a> - code generator for Meteor.js",
+
+		"collections": [
+			{
+				"name": "applications"
+			}
+		],
+
+		"queries": [
+			{
+				"name": "application",
+				"collection": "applications",
+				"filter": { "_id": ":appId" },
+				"options": {},
+				"find_one": true
+			}
+		],
+
+		"free_zone": {
+			"container_class": "container-fluid",
+			"pages": [
+				{
+					"name": "home",
+					"controller_before_action": "var appId = Session.get('appId'); if(appId) Router.go('editor', { applicationId: appId }, { replaceState: true }); else Applications.insert({ text: initialText, json: {} }, function(e, r) { if(!e) { Session.set('appId', r); Router.go('editor', { applicationId: r }, { replaceState: true }); }});"
+				},
+				{
+					"name": "editor",
+					"route_params": ["applicationId?"],
+					"controller_before_action": "if(this.params.applicationId) { Session.set('appId', this.params.applicationId); this.next(); } else { var appId = Session.get('appId'); if(appId) Router.go('editor', { applicationId: appId }); else Router.go('home'); }",
+
+					"components": [
+						{
+							"name": "build_info",
+							"type": "div",
+							"class": "alert alert-info alert-dismissible build-info",
+							"text": "<button type=\"button\" class=\"close build-local\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Close</span></button>",
+							"components": [
+								{
+									"name": "text",
+									"type": "markdown",
+									"source_file": "files/build_info.md"
+								}
+							]
+						},
+						{
+							"name": "editor",
+							"type": "custom",
+							"custom_template": "files/editor",
+							"query_name": "application",
+							"query_params": [ { "name": "appId", "value": "this.params.applicationId" } ]
+						}
+					],
+
+					"events_code": "\"click .build-local\": function(e, t) { $(\".alert.build-info\").toggle(\"fast\"); }"
+				},
+				{
+					"name": "help",
+					"title": "Help",
+					"text": "Under construction"
+				}
+			],
+
+			"components": [
+				{
+					"name": "main_menu",
+					"type": "menu",
+					"class": "nav navbar-nav",
+					"items": [
+						{ "title": "Editor", "route": "editor", "icon_class": "fa fa-pencil" },
+						{ "title": "Help", "route": "help", "icon_class": "fa fa-question-circle" }
+					]
+				}
+			]
+		},
+
+		"server_side_routes": [
+			{
+				"name": "download.text",
+				"route_params": ["applicationId"],
+				"source_file": "files/download_text.js"
+			},
+			{
+				"name": "download.json",
+				"route_params": ["applicationId"],
+				"source_file": "files/download_json.js"
+			}
+		],
+
+		"packages": {
+			"meteor": [ "perak:codemirror", "perak:human2machine" ]
+		},
+
+		"copy_files": [
+
+			{ "source": "files/styles.less", "dest": "CLIENT_STYLES_DIR/styles.less" },
+			{ "source": "files/initial_text.js", "dest": "CLIENT_LIB_DIR/initial_text.js" }
+		]
+	}
+}

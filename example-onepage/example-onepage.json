@@ -1,9 +1,10 @@
 {
 	"application": {
 		"title": "Example application",
-		"footer_text": "Copyright &copy; Your Website 2015",
 
 		"theme": "bootswatch-cosmo",
+
+		"footer_text": "Copyright &copy; Your Website 2015",
 
 		"free_zone": {
 
@@ -104,9 +105,10 @@
 				}
 			],
 
-			"menus": [
+			"components": [
 				{
 					"name": "main_menu",
+					"type": "menu",
 					"class": "nav navbar-nav pull-right",
 					"scroll_spy_selector": "body",
 					"items": [

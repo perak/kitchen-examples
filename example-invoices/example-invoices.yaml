@@ -1,7 +1,5 @@
 application:
   title: Example application
-  meta_title: Example application
-  meta_description: Meteor Kitchen - example application
   theme: bootswatch-paper
   on_user_created_code: "Customers.insert({ name: 'Chuck Norris', email: 'internet@chucknorris.com', ownerId: user._id });"
   collections:
@@ -37,7 +35,6 @@ application:
         - owner
       roles_allowed_to_delete:
         - owner
-      before_insert_code: 'if(!doc.totalAmount) doc.totalAmount = 0;'
     - name: invoices
       fields:
         - name: invoiceNumber
@@ -57,16 +54,17 @@ application:
           title: Customer
           required: true
           input: select
-          lookup_query:
-            name: customers
-            collection: customers
-            filter: {}
+          lookup_query_name: customer_list
           lookup_field: name
           lookup_key: _id
           show_in_dataview: false
           show_in_read_only_form: false
           exportable: false
-        - name: customerName
+          join_collection: customers
+          join_fields:
+            - name
+          join_container: customer
+        - name: customer.name
           title: Customer
           show_in_insert_form: false
           show_in_update_form: false
@@ -121,6 +119,69 @@ application:
       after_insert_code: 'var sum = 0; InvoiceItems.find({ invoiceId: doc.invoiceId }).map(function(item) { sum += item.amount; }); Invoices.update({ _id: doc.invoiceId }, { $set: { totalAmount: sum }});'
       after_update_code: 'var sum = 0; InvoiceItems.find({ invoiceId: doc.invoiceId }).map(function(item) { sum += item.amount; }); Invoices.update({ _id: doc.invoiceId }, { $set: { totalAmount: sum }});'
       after_remove_code: 'var sum = 0; InvoiceItems.find({ invoiceId: doc.invoiceId }).map(function(item) { sum += item.amount; }); Invoices.update({ _id: doc.invoiceId }, { $set: { totalAmount: sum }});'
+  queries:
+    - name: customer_list
+      collection: customers
+      filter: {}
+      options:
+        transform: 'function(doc) { var sum = 0; Invoices.find({ customerId: doc._id }).map(function(item) { if(item.totalAmount) sum += item.totalAmount; }); doc.totalAmount = sum; return doc; }'
+        sort:
+          - name
+      related_queries:
+        - name: invoice_list
+    - name: customers_empty
+      collection: customers
+      filter:
+        _id: null
+      find_one: true
+    - name: customer_details
+      collection: customers
+      find_one: true
+      filter:
+        _id: ':customerId'
+      options:
+        transform: 'function(doc) { var sum = 0; Invoices.find({ customerId: doc._id }).map(function(item) { sum += item.totalAmount; }); doc.totalAmount = sum; return doc; }'
+      related_queries:
+        - name: invoice_list
+    - name: invoice_list
+      collection: invoices
+      filter: {}
+      options:
+        sort:
+          - - invoiceNumber
+            - desc
+    - name: invoices_empty
+      collection: invoices
+      filter:
+        _id: null
+      options: {}
+      find_one: true
+      related_queries:
+        - name: invoice_list
+    - name: invoice_details
+      collection: invoices
+      filter:
+        _id: ':invoiceId'
+      find_one: true
+    - name: invoice_items
+      collection: invoice_items
+      filter:
+        invoiceId: ':invoiceId'
+    - name: invoice_items_empty
+      collection: invoice_items
+      filter:
+        _id: null
+      find_one: true
+    - name: invoice_item
+      collection: invoice_items
+      filter:
+        _id: ':itemId'
+      find_one: true
+    - name: current_user_data
+      collection: users
+      filter:
+        _id: Meteor.userId()
+      find_one: true
   public_zone:
     pages:
       - name: home_public
@@ -142,14 +203,16 @@ application:
         template: reset_password
         route_params:
           - resetPasswordToken
-    menus:
+    components:
       - name: left_menu
+        type: menu
         class: nav navbar-nav
         dest_selector: '#menu'
         items:
           - title: Home
             route: home_public
       - name: right_menu
+        type: menu
         class: nav navbar-nav navbar-right
         dest_selector: '#menu'
         items:
@@ -168,12 +231,7 @@ application:
             type: data_view
             title: Customers
             text_if_empty: 'No customers :('
-            query:
-              name: customer_list
-              collection: customers
-              filter: {}
-              options:
-                transform: 'function(doc) { var sum = 0; Invoices.find({ customerId: doc._id }).map(function(item) { sum += item.totalAmount; }); doc.totalAmount = sum; return doc; }'
+            query_name: customer_list
             insert_route: customers.insert
             edit_route: customers.edit
             edit_route_params:
@@ -183,10 +241,6 @@ application:
             details_route_params:
               - name: customerId
                 value: this._id
-        queries:
-          - name: invoices
-            collection: invoices
-            filter: {}
         pages:
           - name: insert
             components:
@@ -194,11 +248,7 @@ application:
                 type: form
                 mode: insert
                 title: New customer
-                query:
-                  name: customers_empty
-                  collection: customers
-                  filter:
-                    _id: null
+                query_name: customers_empty
                 submit_route: customers
                 cancel_route: customers
           - name: details
@@ -209,13 +259,7 @@ application:
                 type: form
                 mode: read_only
                 title: Details
-                query:
-                  name: customer_details
-                  collection: customers
-                  filter:
-                    _id: ':customerId'
-                  options:
-                    transform: 'function(doc) { var sum = 0; Invoices.find({ customerId: doc._id }).map(function(item) { sum += item.totalAmount; }); doc.totalAmount = sum; return doc; }'
+                query_name: customer_details
                 close_route: customers
                 back_route: customers
           - name: edit
@@ -228,25 +272,14 @@ application:
                 title: Edit customer
                 submit_route: customers
                 cancel_route: customers
-                query:
-                  name: customer
-                  collection: customers
-                  filter:
-                    _id: ':customerId'
+                query_name: customer_details
       - name: invoices
         components:
           - name: view
             type: data_view
             title: Invoices
             text_if_empty: 'No invoices :('
-            query:
-              name: invoice_list
-              collection: invoices
-              filter: {}
-              options:
-                transform: 'function(doc) { var customer = Customers.findOne({_id: doc.customerId }); if(customer) doc.customerName = customer.name; return doc; }'
-                sort:
-                  invoiceNumber: -1
+            query_name: invoice_list
             insert_route: invoices.insert
             edit_route: invoices.edit
             edit_route_params:
@@ -256,10 +289,6 @@ application:
             details_route_params:
               - name: invoiceId
                 value: this._id
-        queries:
-          - name: customers
-            collection: customers
-            filter: {}
         pages:
           - name: insert
             components:
@@ -267,10 +296,7 @@ application:
                 type: form
                 mode: insert
                 title: New invoice
-                query:
-                  name: all_invoices
-                  collection: invoices
-                  filter: {}
+                query_name: invoices_empty
                 helpers_code: "'nextInvoiceNumber': function() { var max = 0; var invoiceNumbers = Invoices.find({}, { fields: { invoiceNumber: 1 }}).fetch(); _.each(invoiceNumbers, function(doc) { var intNum = parseInt(doc.invoiceNumber); if(!isNaN(intNum) && intNum > max) max = intNum; }); return max + 1; }"
                 submit_route: invoices.details
                 submit_route_params:
@@ -287,13 +313,7 @@ application:
                 mode: read_only
                 title: 'Invoice #{{invoice_details.invoiceNumber}}'
                 layout: horizontal
-                query:
-                  name: invoice_details
-                  collection: invoices
-                  filter:
-                    _id: ':invoiceId'
-                  options:
-                    transform: 'function(doc) { var customer = Customers.findOne({_id: doc.customerId }); if(customer) doc.customerName = customer.name; return doc; }'
+                query_name: invoice_details
                 back_route: invoices
             force_yield_subpages: true
             pages:
@@ -302,11 +322,7 @@ application:
                   - name: view
                     type: data_view
                     text_if_empty: No items
-                    query:
-                      name: invoice_items
-                      collection: invoice_items
-                      filter:
-                        invoiceId: ':invoiceId'
+                    query_name: invoice_items
                     insert_button_title: Add item
                     insert_route: invoices.details.insert
                     insert_route_params:
@@ -324,11 +340,7 @@ application:
                     type: form
                     mode: insert
                     title: Add item
-                    query:
-                      name: invoice_items_empty
-                      collection: invoice_items
-                      filter:
-                        _id: null
+                    query_name: invoice_items_empty
                     hidden_fields:
                       - name: invoiceId
                         value: this.params.invoiceId
@@ -348,11 +360,7 @@ application:
                     type: form
                     mode: update
                     title: Edit item
-                    query:
-                      name: invoice_item
-                      collection: invoice_items
-                      filter:
-                        _id: ':itemId'
+                    query_name: invoice_item
                     submit_route: invoices.details
                     submit_route_params:
                       - name: invoiceId
@@ -361,10 +369,6 @@ application:
                     cancel_route_params:
                       - name: invoiceId
                         value: this.params.invoiceId
-            queries:
-              - name: customers
-                collection: customers
-                filter: {}
           - name: edit
             route_params:
               - invoiceId
@@ -375,11 +379,7 @@ application:
                 title: Edit invoice
                 submit_route: invoices
                 cancel_route: invoices
-                query:
-                  name: invoice
-                  collection: invoices
-                  filter:
-                    _id: ':invoiceId'
+                query_name: invoice_details
       - name: user_settings
         pages:
           - name: profile
@@ -389,12 +389,7 @@ application:
                 mode: update
                 title: Edit your profile
                 submit_route: user_settings.profile
-                query:
-                  name: current_user_data
-                  collection: users
-                  filter:
-                    _id: Meteor.userId()
-                  find_one: true
+                query_name: current_user_data
                 fields:
                   - name: profile.name
                     title: Name
@@ -413,8 +408,9 @@ application:
                     title: Website URL
           - name: change_pass
             template: change_pass
-        menus:
+        components:
           - name: side_menu
+            type: menu
             class: nav nav-stacked nav-pills
             items:
               - title: Profile
@@ -423,8 +419,9 @@ application:
                 route: user_settings.change_pass
       - name: logout
         template: logout
-    menus:
+    components:
       - name: left_menu
+        type: menu
         class: nav navbar-nav
         dest_selector: '#menu'
         items:
@@ -435,6 +432,7 @@ application:
           - title: Customers
             route: customers
       - name: right_menu
+        type: menu
         class: nav navbar-nav navbar-right
         dest_selector: '#menu'
         items:

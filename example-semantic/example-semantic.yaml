@@ -12,8 +12,9 @@ application:
       - name: about
         title: About
         text: 'This example application is built with <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> - code generator for Meteor.js. Source code (input file for generator) is <a href="https://github.com/perak/kitchen-examples/tree/master/example-semantic" target="_blank">here</a>.'
-    menus:
+    components:
       - name: main_menu
+        type: menu
         class: ui large secondary pointing menu
         items_container_class: ui container
         items:
@@ -22,6 +23,7 @@ application:
           - title: About
             route: about
       - name: footer_menu
+        type: menu
         dest_selector: '#footer'
         class: ''
         items_container_class: ui horizontal inverted small divided link list

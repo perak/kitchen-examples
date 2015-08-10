@@ -1,8 +1,7 @@
 {
 	"application": {
 		"title": "Example application",
-		"meta_title": "Example application",
-		"meta_description": "Meteor Kitchen - example application",
+
 		"theme": "bootswatch-cosmo",
 
 		"free_zone": {
@@ -25,10 +24,10 @@
 				}
 			],
 
-			"menus": [
-				{ 
+			"components": [
+				{
 					"name": "main_menu",
-                   	"class": "nav navbar-nav",
+					"type": "menu",
 					"items": [
 						{ "title": "Home page", "route": "home" }
 					]

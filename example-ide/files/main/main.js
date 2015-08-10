@@ -46,6 +46,7 @@ Template.TEMPLATE_NAME.helpers({
 
 	"editorOptions": function() {
 		var options = {
+            styleActiveLine: true,
 			lineNumbers: true,
 			keyMap: "sublime",
 			theme: "blackboard",

@@ -1,0 +1,48 @@
+<template name="TEMPLATE_NAME">
+	<div class="row editor-row">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-xs-12">
+					<h4>
+						Describe app in everyday English language:
+						<div class="btn-group pull-right">
+							<a href="{{urlFor 'download.text' applicationId=application._id}}" target="_blank" class="btn btn-sm btn-default">
+								<span class="fa fa-download"></span>
+								Download .txt
+							</a>
+						</div>
+					</h4>
+				</div>
+			</div>
+			<div class="full-height">
+				{{> CodeMirror id="human-editor" options=humanEditorOptions reactiveVar="humanEditorText"}}
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-xs-12">
+					<h4>
+						Input file for meteor-kitchen:
+						<div class="btn-group pull-right">
+							<button class="btn btn-sm btn-danger build-local" type="button">
+								<span class="fa fa-rocket"></span>
+								Build App
+							</button>
+						</div>
+
+						<div class="btn-group pull-right">
+							<a href="{{urlFor 'download.json' applicationId=application._id}}" target="_blank" class="btn btn-sm btn-default">
+								<span class="fa fa-download"></span>
+								Download .json
+							</a>
+						</div>
+					</h4>
+				</div>
+			</div>
+			<div class="full-height">
+				{{> CodeMirror id="json-editor" options=jsonEditorOptions reactiveVar="jsonEditorText"}}
+			</div>
+		</div>
+	</div>
+</template>

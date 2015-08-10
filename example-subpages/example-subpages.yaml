@@ -1,7 +1,5 @@
 application:
   title: Example application
-  meta_title: Example application
-  meta_description: Meteor Kitchen - example application
   theme: bootswatch-simplex
   free_zone:
     pages:
@@ -25,6 +23,14 @@ application:
           - name: sub_page_b
             title: Sub-page B
             components:
+              - name: tab_menu
+                type: menu
+                class: nav nav-tabs
+                items:
+                  - title: Sub-Page B-1
+                    route: cool_page.sub_page_b.sub_page_b_1
+                  - title: Sub-Page B-2
+                    route: cool_page.sub_page_b.sub_page_b_2
               - name: lorem_ipsum
                 type: markdown
                 source_file: files/lorem_ipsum2.md
@@ -41,24 +47,18 @@ application:
                   - name: lorem_ipsum
                     type: markdown
                     source_file: files/lorem_ipsum4.md
-            menus:
-              - name: tab_menu
-                class: nav nav-tabs
-                items:
-                  - title: Sub-Page B-1
-                    route: cool_page.sub_page_b.sub_page_b_1
-                  - title: Sub-Page B-2
-                    route: cool_page.sub_page_b.sub_page_b_2
-        menus:
+        components:
           - name: side_menu
+            type: menu
             class: nav nav-pills nav-stacked
             items:
               - title: Sub-Page A
                 route: cool_page.sub_page_a
               - title: Sub-Page B
                 route: cool_page.sub_page_b
-    menus:
+    components:
       - name: main_menu
+        type: menu
         class: nav navbar-nav
         dest_selector: '#menu'
         items:

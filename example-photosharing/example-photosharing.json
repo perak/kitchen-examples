@@ -1,9 +1,9 @@
 {
 	"application": {
 		"title": "Photosharing",
-		"meta_title": "Example application",
-		"meta_description": "Meteor Kitchen - example application",
+
 		"theme": "bootswatch-paper",
+
 		"collections": [
 			{
 				"name": "notes",
@@ -14,6 +14,38 @@
 				"roles_allowed_to_insert": [],
 				"roles_allowed_to_update": ["owner"],
 				"roles_allowed_to_delete": ["owner"]
+			}
+		],
+
+		"queries": [
+			{
+				"name": "notes",
+				"collection": "notes",
+				"find_one": false,
+				"filter": {},
+				"options": {
+					"sort": {
+						"createdAt": -1
+					}
+				}
+			},
+			{
+				"name": "notes_empty",
+				"collection": "notes",
+				"find_one": true,
+				"filter": {
+					"_id": null
+				},
+				"options": {}
+			},
+			{
+				"name": "current_user_data",
+				"collection": "users",
+				"filter": {
+					"_id": "Meteor.userId()"
+				},
+				"find_one": true,
+				"options": {}
 			}
 		],
 
@@ -34,16 +66,7 @@
 							"mode": "insert",
 							"submit_route": "home_free",
 							"type": "form",
-							"query": {
-								"name": "notes_empty",
-								"collection": "notes",
-								"find_one": false,
-								"filter": {
-									"_id": null
-								},
-								"options": {},
-								"params": []
-							},
+							"query_name": "notes_empty",
 							"fields": [
 								{
 									"name": "text",
@@ -58,18 +81,7 @@
 							"name": "notes",
 							"html": "<template name=\"TEMPLATE_NAME\">\n  {{#each notes}}\n\t<div class=\"panel\" style=\"padding: 0 10px;\">\n      {{#if photo}}\n        <img src=\"{{photo}}\" alt=\"Loading image...\" style=\"margin-top: 10px; width: 100%; height: auto\">\n      {{else}}\n        <p>{{text}}</p>\n      {{/if}}\n      <p class=\"text-muted\">{{name}}, {{livestamp createdAt}}</p>\n    </div>\n  {{/each}}\n</template>",
 							"type": "custom_component",
-							"query": {
-								"name": "notes",
-								"collection": "notes",
-								"find_one": false,
-								"filter": {},
-								"options": {
-									"sort": {
-										"createdAt": -1
-									}
-								},
-								"params": []
-							}
+							"query_name": "notes"
 						}
 					]
 				}
@@ -99,9 +111,10 @@
 					]
 				}
 			],
-			"menus": [
+			"components": [
 				{
 					"name": "left_menu",
+					"type": "menu",
 					"class": "nav navbar-nav",
 					"dest_selector": "#menu",
 					"items": [
@@ -118,6 +131,7 @@
 				},
 				{
 					"name": "right_menu",
+					"type": "menu",
 					"class": "nav navbar-nav navbar-right",
 					"dest_selector": "#menu",
 					"items": [
@@ -149,16 +163,7 @@
 									"mode": "update",
 									"title": "Edit your profile",
 									"submit_route": "user_settings.profile",
-									"query": {
-										"name": "current_user_data",
-										"collection": "users",
-										"filter": {
-											"_id": "Meteor.userId()"
-										},
-										"find_one": true,
-										"options": {},
-										"params": []
-									},
+									"query_name": "current_user_data",
 									"fields": [
 										{
 											"name": "profile.name",
@@ -201,9 +206,10 @@
 							"template": "change_pass"
 						}
 					],
-					"menus": [
+					"components": [
 						{
 							"name": "side_menu",
+							"type": "menu",
 							"class": "nav nav-stacked nav-pills",
 							"items": [
 								{
@@ -223,9 +229,10 @@
 					"template": "logout"
 				}
 			],
-			"menus": [
+			"components": [
 				{
 					"name": "left_menu",
+					"type": "menu",
 					"class": "nav navbar-nav",
 					"dest_selector": "#menu",
 					"items": [
@@ -237,6 +244,7 @@
 				},
 				{
 					"name": "right_menu",
+					"type": "menu",
 					"class": "nav navbar-nav navbar-right",
 					"dest_selector": "#menu",
 					"items": [
@@ -257,11 +265,9 @@
 				}
 			]
 		},
+
 		"packages": {
-			"meteor": [
-				"mdg:camera",
-				"copleykj:livestamp"
-			]
+			"meteor": [ "mdg:camera", "copleykj:livestamp" ]
 		}
 	}
 }

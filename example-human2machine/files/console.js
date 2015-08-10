@@ -22,27 +22,19 @@ Template.TEMPLATE_NAME.rendered = function() {
 	// full height initialy
 	setFullHeight();
 	window.scrollTo(0, 0);
-
-	// initial text
-	Session.set("editorText", "# Markdowned\n\n### Markdown editor with live preview\n\nBuilt in few minutes with [Meteor Kitchen](http://www.meteorkitchen.com) - code generator for Meteor.js\n\n**Enjoy! :)**\n\n");
-}
+	
+	Session.set("appId", this.data.params.applicationId);
+	Session.set("jsonEditorText", JSON.parse(this.data.application.json));
+};
 
 Template.TEMPLATE_NAME.events({
 });
 
 Template.TEMPLATE_NAME.helpers({
-	// codemirror options here
-	"editorOptions": function() {
-        return {
-            styleActiveLine: true,
-            lineNumbers: false,
-            styleActiveLine: true,
-            mode: "markdown"
-        }
-	},
-
-	// codemirror initial text
-	"editorText": function() {
-		return Session.get("editorText");
+	"jsonEditorOptions": function() {
+		return {
+			lineNumbers: false,
+			readOnly: true
+		}
 	}
 });

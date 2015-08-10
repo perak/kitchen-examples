@@ -23,10 +23,10 @@
 				}
 			],
 
-			"menus": [
+			"components": [
 				{
 					"name": "main_menu",
-					"class": "nav navbar-nav",
+					"type": "menu",
 					"items": [
 						{ "title": "Home", "route": "home", "icon_class": "fa fa-home" }
 					]

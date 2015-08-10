@@ -27,6 +27,22 @@
 			}
 		],
 
+		"queries": [
+			{
+				"name": "gallery",
+				"collection": "gallery",
+				"filter": {},
+				"options": {}
+			},
+			{
+				"name": "gallery_empty",
+				"collection": "gallery",
+				"filter": { "_id": null },
+				"options": {},
+				"find_one": true
+			}
+		],
+
 		"free_zone": {
 			"pages": [
 				{
@@ -37,12 +53,7 @@
 							"title": "Example Gallery",
 							"type": "custom_component",
 							"custom_template": "files/gallery",
-							"query": {
-								"name": "gallery",
-								"collection": "gallery",
-								"filter": {},
-								"options": {}
-							}
+							"query_name": "gallery"
 						}
 					],
 
@@ -55,12 +66,7 @@
 									"title": "Add new file",
 									"type": "form",
 									"mode": "insert",
-									"query": {
-										"name": "gallery_empty",
-										"collection": "gallery",
-										"filter": { "_id": null },
-										"options": {}
-									},
+									"query_name": "gallery_empty",
 									"submit_route": "home",
 									"cancel_route": "home"
 								}
@@ -70,9 +76,10 @@
 				}
 			],
 
-			"menus": [
-				{ 
+			"components": [
+				{
 					"name": "main_menu",
+					"type": "menu",
 					"class": "nav navbar-nav",
 					"items": [
 						{ "title": "Example gallery", "route": "home", "icon_class": "fa fa-home" }

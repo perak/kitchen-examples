@@ -1,7 +1,5 @@
 application:
   title: Example application
-  meta_title: Example application
-  meta_description: Meteor Kitchen - example application
   theme: bootswatch-darkly
   use_collection2: false
   collections:
@@ -29,7 +27,29 @@ application:
           input: checkbox
           display_helper: booleanToYesNo
           exportable: true
+  queries:
+    - name: customers
+      collection: customers
+      filter: {}
+    - name: customers_empty
+      collection: customers
+      filter:
+        _id: null
+      find_one: true
+    - name: customer
+      collection: customers
+      filter:
+        _id: ':customerId'
+      find_one: true
   free_zone:
+    components:
+      - name: main_menu
+        type: menu
+        items:
+          - title: Home page
+            route: home
+          - title: Customers
+            route: customers
     pages:
       - name: home
         title: ''
@@ -46,10 +66,8 @@ application:
             type: data_view
             title: Customers
             text_if_empty: 'No customers :('
-            query:
-              name: customers
-              collection: customers
-              filter: {}
+            query_name: customers
+            query_params: []
             insert_route: customers.insert
             edit_route: customers.edit
             edit_route_params:
@@ -66,11 +84,8 @@ application:
                 type: form
                 mode: insert
                 title: New customer
-                query:
-                  name: customers_empty
-                  collection: customers
-                  filter:
-                    _id: null
+                query_name: customers_empty
+                query_params: []
                 submit_route: customers
                 cancel_route: customers
           - name: details
@@ -82,11 +97,8 @@ application:
                 mode: read_only
                 title: Details
                 layout: horizontal
-                query:
-                  name: customer
-                  collection: customers
-                  filter:
-                    _id: ':customerId'
+                query_name: customer
+                query_params: []
                 close_route: customers
                 back_route: customers
           - name: edit
@@ -99,18 +111,6 @@ application:
                 title: Edit customer
                 submit_route: customers
                 cancel_route: customers
-                query:
-                  name: customer
-                  collection: customers
-                  filter:
-                    _id: ':customerId'
-    menus:
-      - name: main_menu
-        class: nav navbar-nav
-        dest_selector: '#menu'
-        items:
-          - title: Home page
-            route: home
-          - title: Customers
-            route: customers
+                query_name: customer
+                query_params: []
 

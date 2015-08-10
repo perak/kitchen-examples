@@ -1,7 +1,5 @@
 application:
   title: Example application
-  meta_title: Example application
-  meta_description: Meteor Kitchen - example application
   theme: bootswatch-cosmo
   free_zone:
     pages:
@@ -16,9 +14,9 @@ application:
             type: example2
             properties:
               anything: here
-    menus:
+    components:
       - name: main_menu
-        class: nav navbar-nav
+        type: menu
         items:
           - title: Home page
             route: home
