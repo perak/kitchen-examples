@@ -3,8 +3,8 @@ application:
   frontend: semantic-ui
   free_zone:
     layout: navbar
-    container_class: ui main container
-    footer_class: ui inverted center aligned vertical footer segment
+    container_class: ''
+    footer_class: ''
     pages:
       - name: home
         title: 'Hello semantic-ui!'
