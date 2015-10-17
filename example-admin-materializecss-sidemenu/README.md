@@ -1,4 +1,4 @@
-Admin panel sidemnu example with materializecss (http://materializecss.com/)
+Admin panel sidemenu example with materializecss (http://materializecss.com/)
 ============================================================================
 
 This example shows the usage of sidemenu layout and component.
