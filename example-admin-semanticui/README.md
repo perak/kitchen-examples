@@ -1,5 +1,5 @@
-Admin panel example
-===================
+Admin panel example with semantic-ui (http://semantic-ui.com/)
+==============================================================
 
 This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build meteor application with user account system and admin panel.
 

@@ -1,5 +1,7 @@
-Admin panel example
-===================
+Admin panel sidemenu example with semantic-ui (http://semantic-ui.com/)
+=======================================================================
+
+This example shows the usage of sidemenu layout and component.
 
 This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build meteor application with user account system and admin panel.
 
