@@ -65,7 +65,7 @@
 				{
 					"name": "left_menu",
 					"type": "menu",
-					"class": "",
+					"class": "left",
 					"title": "Left menu",
 					"dest_selector": "#menu",
 					"items": [
@@ -90,8 +90,6 @@
 		"private_zone": {
 			"pages": [
 				{ "name": "home_private", "title": "Welcome {{userFullName}}!" },
-
-
 				{
 					"name": "admin",
 					"roles": ["admin"],
@@ -281,8 +279,14 @@
 					"dest_selector": "#menu",
 					"items": [
 						{ "title": "Admin", "route": "admin", "icon_class": "brightness_auto" },
-						{ "title": "Settings", "route": "user_settings","icon_class":"settings" },
-						{ "title": "Logout", "route": "logout","icon_class":"power_settings_new" }
+						{
+							"title": "{{userEmail}}",
+							"items": [
+								{ "title": "Settings", "route": "user_settings","icon_class":"settings" },
+								{ "title": "Logout", "route": "logout","icon_class":"power_settings_new" }
+							],
+							"icon_class": "settings"
+						}
 					]
 				}
 			]
