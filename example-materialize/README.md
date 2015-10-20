@@ -22,3 +22,32 @@ Meteor-kitchen natively supports input files written in **JSON**. To use the **Y
 ```
 npm install -g js-yaml
 ```
+
+How to use application
+----------------------
+
+When you start the application and register, your user account will have role "user" by default and you will not be able to see admin panel.
+
+To make yourself admin, you first need to find your user ID. Open mongo shell and type:
+
+```
+db.users.find().pretty()
+```
+
+Copy your user id and then type:
+
+```
+db.users.update({ _id: "YOUR_USER_ID" }, { $set: { roles: ["admin"] } })
+```
+
+Now, you have admin panel in your application and you can manage users.
+
+This example has three user roles:
+
+- `user` can login but cannot access admin panel
+
+- `admin` can access admin panel
+
+- `blocked` user is blocked and cannot login
+
+That's it :)

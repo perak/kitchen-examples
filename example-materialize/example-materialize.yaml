@@ -64,7 +64,7 @@ application:
             icon_class: store
       - name: right_menu
         type: menu
-        class: ''
+        class: right
         dest_selector: '#menu'
         title: Right menu
         items:
