@@ -5,7 +5,7 @@ This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteo
 
 Generated application is using <a href="http://semantic-ui.com" target="_blank">semantic-ui</a> frontend framework.
 
-You can see live example <a href="http://generator-semantic.meteor.com" target="_blank">here</a>.
+You can see live example <a href="http://example-semantic.meteorfarm.com" target="_blank">here</a>.
 
 To build and run example, inside this directory type:
 

@@ -3,7 +3,7 @@ Invoices example
 
 This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build simple invoicing application. It demonstrates how to use DataViews, Forms with dates and lookup fields, master-detail relations etc.
 
-You can see live example <a href="http://generator-invoices.meteor.com" target="_blank">here</a>.
+You can see live example <a href="http://example-invoices.meteorfarm.com" target="_blank">here</a>.
 
 To build and run example, inside this directory type:
 

@@ -3,7 +3,7 @@ DataView example
 
 This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build simple meteor database application with CRUD functionality.
 
-You can see live example <a href="http://generator-dataview.meteor.com" target="_blank">here</a>.
+You can see live example <a href="http://example-dataview.meteorfarm.com" target="_blank">here</a>.
 
 To build and run example, inside this directory type:
 

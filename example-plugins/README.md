@@ -3,7 +3,7 @@ Plugins example
 
 This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build simple meteor application that shows how to use meteor-kitchen plugins.
 
-You can see live example <a href="http://generator-plugins.meteor.com" target="_blank">here</a>.
+You can see live example <a href="http://example-plugins.meteorfarm.com" target="_blank">here</a>.
 
 To build and run example, inside this directory type:
 

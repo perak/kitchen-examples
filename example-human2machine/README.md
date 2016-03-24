@@ -4,7 +4,7 @@ human2machine
 This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build meteor application - human to machine converter.
 Program converts application description written in everyday English language to input file for meteor-kitchen - live as you type.
 
-You can see **live example** <a href="http://generator-human2machine.meteor.com" target="_blank">here</a>.
+You can see **live example** <a href="http://example-human2machine.meteorfarm.com" target="_blank">here</a>.
 
 To build and run example, inside this directory type:
 

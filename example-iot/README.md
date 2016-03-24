@@ -5,7 +5,7 @@ This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteo
 
 Server is connected to <a href="http://test.mosquitto.org">mqtt://test.mosquitto.org</a> MQTT broker and subscribed to `revspace/sensors/#` topic. Received messages are written into "Sensors" collection and shown to clients.
 
-You can see live example <a href="http://generator-iot.meteor.com" target="_blank">here</a>.
+You can see live example <a href="http://example-iot.meteorfarm.com" target="_blank">here</a>.
 
 To build and run example, inside this directory type:
 

@@ -3,7 +3,7 @@ Photosharing
 
 This is example application built with meteor-kitchen GUI.
 
-Live example is <a href="http://generator-photosharing.meteor.com" target="_blank">here</a>.
+Live example is <a href="http://example-photosharing.meteorfarm.com" target="_blank">here</a>.
 See <a href="//www.youtube.com/embed/7zWBhtE72o4" target="_blank">video tutorial</a>.
 
 To build and run example, inside this directory type:

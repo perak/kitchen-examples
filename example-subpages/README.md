@@ -3,7 +3,7 @@ Subpages example
 
 This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build simple meteor application with pages having subpages and submenus.
 
-You can see live example <a href="http://generator-subpages.meteor.com" target="_blank">here</a>.
+You can see live example <a href="http://example-subpages.meteorfarm.com" target="_blank">here</a>.
 
 To build and run example, inside this directory type:
 

@@ -6,8 +6,7 @@ application:
     - user
   default_role: user
   send_verification_email: true
-  collections:
-    - name: customers
+  collections: []
   queries:
     - name: admin_users
       collection: users

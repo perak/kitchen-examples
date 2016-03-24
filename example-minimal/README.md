@@ -3,7 +3,7 @@ Minimal example
 
 This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build minimal meteor application with navbar and two pages.
 
-You can see live example <a href="http://generator-minimal.meteor.com" target="_blank">here</a>.
+You can see live example <a href="http://example-minimal.meteorfarm.com" target="_blank">here</a>.
 
 To build and run example, inside this directory type:
 

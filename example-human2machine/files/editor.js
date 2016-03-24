@@ -36,6 +36,13 @@ Template.TEMPLATE_NAME.rendered = function() {
 };
 
 Template.TEMPLATE_NAME.events({
+	"click .button-build": function(e, t) {
+		var appId = t.data && t.data.application && t.data.application._id;
+		if(!appId) {
+			return false;
+		}
+		Router.go('build', { applicationId: appId });
+	}
 });
 
 Template.TEMPLATE_NAME.helpers({
@@ -43,7 +50,8 @@ Template.TEMPLATE_NAME.helpers({
 	"humanEditorOptions": function() {
 		return {
             styleActiveLine: true,
-			lineNumbers: false
+			lineNumbers: false,
+			lineWrapping: true
 		}
 	},
 

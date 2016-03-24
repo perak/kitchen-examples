@@ -5,7 +5,7 @@ This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteo
 
 Application is using <a href="https://github.com/CollectionFS/Meteor-CollectionFS" target="_blank">CollectionFS</a> and stores data into database (using "gridfs" storage adapter).
 
-You can see live example <a href="http://generator-upload.meteor.com" target="_blank">here</a>.
+You can see live example <a href="http://example-upload.meteorfarm.com" target="_blank">here</a>.
 
 To build and run example, inside this directory type:
 

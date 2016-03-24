@@ -35,6 +35,26 @@
 
 					"components": [
 						{
+							"name": "editor",
+							"type": "custom",
+							"custom_template": "files/editor",
+							"query_name": "application",
+							"query_params": [ { "name": "appId", "value": "this.params.applicationId" } ]
+						}
+					]
+				},
+				{
+					"name": "help",
+					"title": "Help",
+					"text": "Under construction"
+				},
+				{
+					"name": "build",
+					"route_params": ["applicationId?"],
+					"controller_before_action": "if(this.params.applicationId) { Session.set('appId', this.params.applicationId); this.next(); } else { var appId = Session.get('appId'); if(appId) Router.go('build', { applicationId: appId }); else Router.go('home'); }",
+
+					"components": [
+						{
 							"name": "build_info",
 							"type": "div",
 							"class": "alert alert-info alert-dismissible build-info",
@@ -48,20 +68,15 @@
 							]
 						},
 						{
-							"name": "editor",
+							"name": "console",
 							"type": "custom",
-							"custom_template": "files/editor",
+							"custom_template": "files/console",
 							"query_name": "application",
 							"query_params": [ { "name": "appId", "value": "this.params.applicationId" } ]
 						}
 					],
 
 					"events_code": "\"click .build-local\": function(e, t) { $(\".alert.build-info\").toggle(\"fast\"); }"
-				},
-				{
-					"name": "help",
-					"title": "Help",
-					"text": "Under construction"
 				}
 			],
 
@@ -80,25 +95,26 @@
 
 		"server_side_routes": [
 			{
-				"name": "download.text",
+				"name": "api.getapp.text",
 				"route_params": ["applicationId"],
 				"source_file": "files/download_text.js"
 			},
 			{
-				"name": "download.json",
+				"name": "api.getapp.json",
 				"route_params": ["applicationId"],
 				"source_file": "files/download_json.js"
 			}
 		],
 
 		"packages": {
-			"meteor": [ "perak:codemirror", "perak:human2machine" ]
+			"meteor": [ "perak:codemirror", "perak:human2machine", "mizzao:bootboxjs" ]
 		},
 
 		"copy_files": [
 
 			{ "source": "files/styles.less", "dest": "CLIENT_STYLES_DIR/styles.less" },
-			{ "source": "files/initial_text.js", "dest": "CLIENT_LIB_DIR/initial_text.js" }
+			{ "source": "files/initial_text.js", "dest": "CLIENT_LIB_DIR/initial_text.js" },
+			{ "source": "files/settings.json", "dest": "OUTPUT_DIR/settings.json" }
 		]
 	}
 }

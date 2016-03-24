@@ -3,7 +3,7 @@ Example IDE
 
 This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build meteor application - minimalistic IDE.
 
-You can see live example <a href="http://generator-ide.meteor.com" target="_blank">here</a>.
+You can see live example <a href="http://example-ide.meteorfarm.com" target="_blank">here</a>.
 
 To build and run example, inside this directory type:
 
