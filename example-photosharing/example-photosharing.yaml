@@ -173,4 +173,5 @@ application:
     meteor:
       - 'mdg:camera'
       - 'copleykj:livestamp'
+      - session
 

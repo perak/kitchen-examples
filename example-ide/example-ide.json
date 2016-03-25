@@ -505,7 +505,7 @@
 		},
 
 		"packages": {
-			"meteor": ["perak:codemirror", "perak:markdown"]
+			"meteor": [ "perak:codemirror", "perak:markdown", "session" ]
 		},
 
 		"copy_files": [

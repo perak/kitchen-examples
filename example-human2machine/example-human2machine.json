@@ -107,7 +107,7 @@
 		],
 
 		"packages": {
-			"meteor": [ "perak:codemirror", "perak:human2machine", "mizzao:bootboxjs" ]
+			"meteor": [ "perak:codemirror", "perak:human2machine", "mizzao:bootboxjs", "session" ]
 		},
 
 		"copy_files": [

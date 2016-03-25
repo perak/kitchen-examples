@@ -679,7 +679,8 @@
     "packages": {
       "meteor": [
         "perak:codemirror",
-        "perak:markdown"
+        "perak:markdown",
+        "session"
       ]
     },
     "copy_files": []

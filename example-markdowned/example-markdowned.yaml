@@ -21,6 +21,7 @@ application:
     meteor:
       - 'perak:codemirror'
       - 'perak:markdown'
+      - session
   copy_files:
     - source: files/styles.less
       dest: CLIENT_STYLES_DIR/styles.less
