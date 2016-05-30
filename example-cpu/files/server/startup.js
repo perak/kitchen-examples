@@ -1,7 +1,8 @@
 // Executes script.sh every 1000ms and writes stdout (or stderr) to Output collection
 
 Meteor.setInterval(function() {
-	var command = process.env.PWD + "/private/script.sh";
+//	var command = process.env.PWD + "/private/script.sh";
+var command = "/opt/example-cpu/script.sh";
 	var args = "";
 	execScript(command, [], Meteor.bindEnvironment(function(err, res) {
 		if(err) {
