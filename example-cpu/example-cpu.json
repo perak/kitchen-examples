@@ -1,0 +1,61 @@
+{
+	"application": {
+		"collections": [
+			{
+				"name": "output",
+				"type": "collection",
+				"fields": [
+					{
+						"name": "stdout",
+						"type": "string"
+					},
+					{
+						"name": "stderr",
+						"type": "string"
+					}
+				]
+			}
+		],
+		"queries": [
+			{
+				"name": "output",
+				"collection": "output",
+				"find_one": true
+			}
+		],
+		"free_zone": {
+			"type": "zone",
+			"components": [
+				{
+					"name": "menu",
+					"type": "menu",
+					"items": [
+						{
+							"title": "Home",
+							"route": "home"
+						}
+					],
+					"object_type": "menu"
+				}
+			],
+			"pages": [
+				{
+					"name": "home",
+					"type": "page",
+					"query_name": "output",
+					"text": "<h3>Server CPU usage</h3><h1>{{output.stdout}}</h1>\n<p style=\"color: red\">{{output.stderr}}</p>\n"
+				}
+			]
+		},
+		"server_startup_source_file": "files/server/startup.js",
+		"packages": {
+			"npm": [
+				"event-stream"
+			]
+		},
+		"copy_files": [
+			{ "source": "files/server/spawn_and_pipe.js", "dest": "SERVER_LIB_DIR" },
+			{ "source": "files/private/script.sh", "dest": "PRIVATE_DIR" }
+		]
+	}
+}
