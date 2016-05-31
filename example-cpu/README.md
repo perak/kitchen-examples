@@ -1,7 +1,7 @@
-CPU Usage
-=========
+CPU Usage - CoAP example
+========================
 
-This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build meteor application which shows server CPU usage %.
+This input file for <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> will build meteor application which shows server CPU usage by running server-side script. Aditionaly, it creates CoAP server and provides CPU usage. 
 
 You can see live example <a href="http://example-cpu.meteorfarm.com" target="_blank">here</a>.
 
@@ -22,4 +22,24 @@ Meteor-kitchen natively supports input files written in **JSON**. To use the **Y
 
 ```
 npm install -g js-yaml
+```
+
+
+## CoAP client
+
+You can test CoAP interface by running simple node.js CoAP client:
+
+```
+var coap = require('coap');
+
+var req = coap.request('coap://localhost/cpu');
+
+req.on('response', function(res) {
+  res.pipe(process.stdout);
+  res.on('end', function() {
+    process.exit(0);
+  });
+});
+
+req.end();
 ```

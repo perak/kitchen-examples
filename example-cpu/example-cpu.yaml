@@ -31,6 +31,7 @@ application:
   packages:
     npm:
       - event-stream
+      - coap
   copy_files:
     - source: files/server/spawn_and_pipe.js
       dest: SERVER_LIB_DIR
