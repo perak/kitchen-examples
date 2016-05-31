@@ -32,7 +32,7 @@ You can test CoAP interface by running simple node.js CoAP client:
 ```
 var coap = require('coap');
 
-var req = coap.request('coap://localhost/cpu');
+var req = coap.request('coap://example-cpu.meteorfarm.com/cpu'); // or if you are running locally coap://localhost/cpu
 
 req.on('response', function(res) {
   res.pipe(process.stdout);
