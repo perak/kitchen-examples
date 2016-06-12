@@ -8,7 +8,7 @@
 	//
 
 	Meteor.setInterval(function() {
-		execScript(assetsRoot + command, args, Meteor.bindEnvironment(function(err, res) {
+		executeScript(assetsRoot + command, args, Meteor.bindEnvironment(function(err, res) {
 			if(err) {
 				console.log(err.reason);
 				Output.upsert({}, { $set: { stdout: "", stderr: err.reason }});
@@ -23,10 +23,10 @@
 	// CoAP server
 	//
 	var coap = require('coap');
-	var coapServer = coap.createServer()
+	var coapServer = coap.createServer();
 
 	coapServer.on('request', function(req, res) {
-		execScript(assetsRoot + command, args, function(err, result) {
+		executeScript(assetsRoot + command, args, function(err, result) {
 			if(err) {
 				res.end(err.reason);
 			} else {

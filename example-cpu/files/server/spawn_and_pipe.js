@@ -3,7 +3,7 @@
 // args are arguments passed to cmd
 // callback is function(err, res) where err is error object with reason set from stderr, and res is string from stdout
 
-this.execScript = function(cmd, args, callback) {
+this.executeScript = function(cmd, args, callback) {
   var argsArray = args ? args.split(" ") : [];
 
   var spawn = require('child_process').spawn;
