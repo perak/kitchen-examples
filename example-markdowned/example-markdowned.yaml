@@ -1,7 +1,10 @@
 application:
   title: Markdowned
   theme: bootswatch-darkly
-  footer_text: 'Markdowned - Markdown editor with live preview. Built in few minutes with <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> - code generator for Meteor.js'
+  footer_text: >-
+    Markdowned - Markdown editor with live preview. Built in few minutes with <a
+    href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> -
+    source code generator for Meteor.js
   free_zone:
     container_class: container-fluid
     pages:

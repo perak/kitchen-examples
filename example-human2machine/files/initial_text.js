@@ -4,5 +4,5 @@ initialText = ""+
 "Please create one collection: customers.\n"+
 "In customers collection I want three fields: name, address and e-mail.\n"+
 "In customers page I want CRUD for customers collection.\n"+
-"In about page I want text: \"This application is written in human language using Meteor Kitchen, code generator for Meteor\".\n"+
+"In about page I want text: \"This application is written in human language using Meteor Kitchen, source code generator for Meteor\".\n"+
 "";

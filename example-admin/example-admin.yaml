@@ -10,21 +10,18 @@ application:
   queries:
     - name: admin_users
       collection: users
-      filter: {}
+      filter: '{}'
     - name: admin_user
       collection: users
-      filter:
-        _id: ':userId'
+      filter: '{ "_id": ":userId" }'
       find_one: true
     - name: users_null
       collection: users
-      filter:
-        _id: null
+      filter: '{ "_id": null }'
       find_one: true
     - name: current_user_data
       collection: users
-      filter:
-        _id: Meteor.userId()
+      filter: '{ "_id": "Meteor.userId()" }'
       find_one: true
   public_zone:
     pages:
@@ -34,8 +31,16 @@ application:
           - name: home_jumbotron
             title: Example application
             type: jumbotron
-            text: '<b>This is example application built with <a href="http://www.meteorkitchen.com" target="_blank">meteor-kitchen</a> code generator without manual coding.</b><br />It demonstrates simple application with user account system and admin panel.<br />Source code (input file for generator) is <a href="https://github.com/perak/kitchen-examples/tree/master/example-admin" target="_blank">here</a>.'
-            button_title: 'Continue &raquo;'
+            text: >-
+              <b>This is example application built with <a
+              href="http://www.meteorkitchen.com"
+              target="_blank">meteor-kitchen</a> code generator without manual
+              coding.</b><br />It demonstrates simple application with user
+              account system and admin panel.<br />Source code (input file for
+              generator) is <a
+              href="https://github.com/perak/kitchen-examples/tree/master/example-admin"
+              target="_blank">here</a>.
+            button_title: Continue &raquo;
             button_route: login
       - name: login
         template: login

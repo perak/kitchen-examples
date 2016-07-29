@@ -1,688 +1,414 @@
-{
-  "application": {
-    "title": "Cloud IDE",
-    "theme": "bootswatch-cyborg",
-    "roles": [
-      "admin",
-      "user",
-      "blocked"
-    ],
-    "default_role": "user",
-    "collections": [
-      {
-        "name": "projects",
-        "roles_allowed_to_read": [
-          "owner"
-        ],
-        "roles_allowed_to_insert": [],
-        "roles_allowed_to_update": [
-          "owner"
-        ],
-        "roles_allowed_to_delete": [
-          "owner"
-        ],
-        "fields": [
-          {
-            "name": "name",
-            "title": "Project name",
-            "type": "string",
-            "required": true
-          },
-          {
-            "name": "description",
-            "title": "Description",
-            "type": "string",
-            "input": "textarea",
-            "show_in_dataview": false,
-            "show_in_read_only_form": true,
-            "show_in_insert_form": true,
-            "show_in_edit_form": true
-          }
-        ],
-        "after_insert_code": "var newId = FileSystem.insert({ projectId: doc._id, filename: doc.name, type: 'dir', expanded: true }); FileSystem.insert({ projectId: doc._id, parentId: newId, filename: 'README.md', type: 'item', content: '# ' + doc.name + '\\n\\n' + doc.description + '\\n' });"
-      },
-      {
-        "name": "file_system",
-        "roles_allowed_to_read": [
-          "owner"
-        ],
-        "roles_allowed_to_insert": [],
-        "roles_allowed_to_update": [
-          "owner"
-        ],
-        "roles_allowed_to_delete": [
-          "owner"
-        ],
-        "fields": [
-          {
-            "name": "filename",
-            "title": "Filename",
-            "type": "string",
-            "required": true
-          },
-          {
-            "name": "type",
-            "type": "string",
-            "required": true
-          },
-          {
-            "name": "parentId",
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "type": "string",
-            "required": true
-          }
-        ],
-        "after_remove_code": "FileSystem.remove({ parentId: doc._id });"
-      }
-    ],
-    "queries": [
-      {
-        "name": "projects",
-        "collection": "projects",
-        "filter": {},
-        "options": {}
-      },
-      {
-        "name": "project",
-        "collection": "projects",
-        "find_one": true,
-        "filter": {
-          "_id": ":projectId"
-        },
-        "options": {}
-      },
-      {
-        "name": "project_empty",
-        "collection": "projects",
-        "filter": {
-          "_id": null
-        },
-        "options": {},
-        "find_one": true
-      },
-      {
-        "name": "project_files",
-        "collection": "file_system",
-        "filter": {
-          "projectId": ":projectId"
-        },
-        "options": {
-          "sort": [
-            "filename"
-          ]
-        }
-      },
-      {
-        "name": "file",
-        "collection": "file_system",
-        "find_one": true,
-        "filter": {
-          "_id": ":fileId"
-        },
-        "options": {}
-      },
-      {
-        "name": "admin_users",
-        "collection": "users",
-        "filter": {}
-      },
-      {
-        "name": "admin_user",
-        "collection": "users",
-        "filter": {
-          "_id": ":userId"
-        },
-        "find_one": true
-      },
-      {
-        "name": "users_null",
-        "collection": "users",
-        "filter": {
-          "_id": null
-        },
-        "find_one": true
-      },
-      {
-        "name": "current_user_data",
-        "collection": "users",
-        "filter": {
-          "_id": "Meteor.userId()"
-        },
-        "find_one": true
-      }
-    ],
-    "public_zone": {
-      "pages": [
-        {
-          "name": "home_public",
-          "components": [
-            {
-              "name": "home_jumbotron",
-              "title": "Cloud IDE",
-              "title_icon_class": "fa fa-cloud",
-              "type": "jumbotron",
-              "dest_position": "before",
-              "text": "This example application is built with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">Meteor Kitchen</a> - code generator for <a href=\"https://www.meteor.com/\" target=\"_blank\">Meteor.js</a>",
-              "button_title": "Continue &raquo;",
-              "button_route": "login"
-            }
-          ]
-        },
-        {
-          "name": "login",
-          "template": "login"
-        },
-        {
-          "name": "register",
-          "template": "register"
-        },
-        {
-          "name": "forgot_password",
-          "template": "forgot_password"
-        },
-        {
-          "name": "reset_password",
-          "template": "reset_password",
-          "route_params": [
-            "resetPasswordToken"
-          ]
-        }
-      ],
-      "components": [
-        {
-          "name": "left_menu",
-          "type": "menu",
-          "class": "nav navbar-nav",
-          "dest_selector": "#menu",
-          "items": [
-            {
-              "title": "Home",
-              "route": "home_public"
-            }
-          ]
-        },
-        {
-          "name": "right_menu",
-          "type": "menu",
-          "class": "nav navbar-nav navbar-right",
-          "dest_selector": "#menu",
-          "items": [
-            {
-              "title": "Register",
-              "route": "register"
-            },
-            {
-              "title": "Login",
-              "route": "login"
-            }
-          ]
-        }
-      ]
-    },
-    "private_zone": {
-      "pages": [
-        {
-          "name": "projects",
-          "components": [
-            {
-              "name": "list",
-              "title": "My projects",
-              "type": "dataview",
-              "query_name": "projects",
-              "insert_route": "projects.insert",
-              "details_route": "projects.main",
-              "details_route_params": [
-                {
-                  "name": "projectId",
-                  "value": "this._id"
-                },
-                {
-                  "name": "fileId",
-                  "value": null
-                }
-              ],
-              "edit_route": "projects.edit",
-              "edit_route_params": [
-                {
-                  "name": "projectId",
-                  "value": "this._id"
-                },
-                {
-                  "name": "fileId",
-                  "value": null
-                }
-              ]
-            }
-          ],
-          "pages": [
-            {
-              "name": "main",
-              "title": "{{project.name}}",
-              "template": "page_subcontent_navbar",
-              "container_class": "container-fluid",
-              "route_params": [
-                "projectId",
-                "fileId"
-              ],
-              "query_name": "project",
-              "back_route": "projects",
-              "pages": [
-                {
-                  "name": "editor",
-                  "container_class": "col-xs-7 col-xs-offset-5 col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2",
-                  "parent_layout": true,
-                  "force_yield_subpages": true,
-                  "components": [
-                    {
-                      "name": "sidebar",
-                      "type": "div",
-                      "class": "col-xs-5 col-sm-3 col-md-2 sidebar",
-                      "dest_selector": ".page-container",
-                      "dest_position": "before"
-                    },
-                    {
-                      "name": "tree",
-                      "type": "tree_view",
-                      "dest_selector": ".sidebar",
-                      "query_name": "project_files",
-                      "item_name_field": "filename",
-                      "item_type_field": "type",
-                      "item_route": "projects.main.editor",
-                      "item_route_params": [
-                        {
-                          "name": "projectId",
-                          "value": "this.projectId"
-                        },
-                        {
-                          "name": "fileId",
-                          "value": "this._id"
-                        }
-                      ],
-                      "folder_route": "projects.main.editor",
-                      "folder_route_params": [
-                        {
-                          "name": "projectId",
-                          "value": "this.projectId"
-                        },
-                        {
-                          "name": "fileId",
-                          "value": "this._id"
-                        }
-                      ]
-                    },
-                    {
-                      "name": "view",
-                      "type": "custom_component",
-                      "title": "{{file.filename}}",
-                      "custom_template": "files/main/main",
-                      "query_name": "file"
-                    }
-                  ]
-                }
-              ],
-              "components": [
-                {
-                  "name": "left_menu",
-                  "type": "menu",
-                  "class": "nav navbar-nav",
-                  "items": [
-                    {
-                      "title": "Editor",
-                      "route": "projects.main.editor",
-                      "route_params": [
-                        {
-                          "name": "projectId",
-                          "value": "this.params.projectId"
-                        },
-                        {
-                          "name": "fileId",
-                          "value": "this.params.fileId"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "name": "right_menu",
-                  "type": "menu",
-                  "class": "nav navbar-nav navbar-right",
-                  "items": []
-                }
-              ]
-            },
-            {
-              "name": "insert",
-              "components": [
-                {
-                  "name": "form",
-                  "type": "form",
-                  "mode": "insert",
-                  "title": "New project",
-                  "query_name": "project_empty",
-                  "submit_route": "projects.main",
-                  "submit_route_params": [
-                    {
-                      "name": "projectId",
-                      "value": "newId"
-                    },
-                    {
-                      "name": "fileId",
-                      "value": null
-                    }
-                  ],
-                  "cancel_route": "projects"
-                }
-              ]
-            },
-            {
-              "name": "edit",
-              "route_params": [
-                "projectId"
-              ],
-              "components": [
-                {
-                  "name": "form",
-                  "type": "form",
-                  "mode": "update",
-                  "title": "Edit project settings",
-                  "query_name": "project",
-                  "submit_route": "projects",
-                  "cancel_route": "projects"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "admin",
-          "roles": [
-            "admin"
-          ],
-          "pages": [
-            {
-              "name": "users",
-              "components": [
-                {
-                  "name": "view",
-                  "type": "data_view",
-                  "title": "Users",
-                  "text_if_empty": "No users yet",
-                  "query_name": "admin_users",
-                  "fields": [
-                    {
-                      "name": "profile.name",
-                      "title": "Name"
-                    },
-                    {
-                      "name": "profile.email",
-                      "title": "E-mail"
-                    },
-                    {
-                      "name": "roles",
-                      "title": "Role"
-                    }
-                  ],
-                  "insert_route": "admin.users.insert",
-                  "edit_route": "admin.users.edit",
-                  "edit_route_params": [
-                    {
-                      "name": "userId",
-                      "value": "this._id"
-                    }
-                  ],
-                  "details_route": "admin.users.details",
-                  "details_route_params": [
-                    {
-                      "name": "userId",
-                      "value": "this._id"
-                    }
-                  ]
-                }
-              ],
-              "pages": [
-                {
-                  "name": "details",
-                  "route_params": [
-                    "userId"
-                  ],
-                  "components": [
-                    {
-                      "name": "details_form",
-                      "type": "form",
-                      "mode": "read_only",
-                      "title": "User details",
-                      "query_name": "admin_user",
-                      "fields": [
-                        {
-                          "name": "profile.name",
-                          "title": "Name"
-                        },
-                        {
-                          "name": "profile.email",
-                          "title": "E-mail",
-                          "type": "email"
-                        },
-                        {
-                          "name": "roles",
-                          "title": "Role"
-                        }
-                      ],
-                      "close_route": "admin.users",
-                      "back_route": "admin.users"
-                    }
-                  ]
-                },
-                {
-                  "name": "insert",
-                  "components": [
-                    {
-                      "name": "insert_form",
-                      "type": "form",
-                      "mode": "insert",
-                      "title": "Add new user",
-                      "submit_route": "admin.users",
-                      "cancel_route": "admin.users",
-                      "query_name": "users_null",
-                      "fields": [
-                        {
-                          "name": "profile.name",
-                          "title": "Name",
-                          "required": true
-                        },
-                        {
-                          "name": "profile.email",
-                          "title": "E-mail",
-                          "type": "email",
-                          "required": true
-                        },
-                        {
-                          "name": "password",
-                          "title": "Password",
-                          "input": "password",
-                          "required": true
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "name": "edit",
-                  "route_params": [
-                    "userId"
-                  ],
-                  "components": [
-                    {
-                      "name": "edit_form",
-                      "type": "form",
-                      "mode": "update",
-                      "title": "Edit user",
-                      "submit_route": "admin.users",
-                      "cancel_route": "admin.users",
-                      "query_name": "admin_user",
-                      "fields": [
-                        {
-                          "name": "profile.name",
-                          "title": "Name",
-                          "required": true
-                        },
-                        {
-                          "name": "profile.email",
-                          "title": "E-mail",
-                          "type": "email",
-                          "required": true
-                        },
-                        {
-                          "name": "roles",
-                          "type": "array",
-                          "title": "Role",
-                          "input": "radio",
-                          "input_items": [
-                            {
-                              "value": "user",
-                              "title": "User"
-                            },
-                            {
-                              "value": "admin",
-                              "title": "Admin"
-                            },
-                            {
-                              "value": "blocked",
-                              "title": "Blocked"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "components": [
-            {
-              "name": "side_menu",
-              "type": "menu",
-              "class": "nav nav-stacked nav-pills",
-              "items": [
-                {
-                  "title": "Users",
-                  "route": "admin.users"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "user_settings",
-          "roles": [
-            "user",
-            "admin"
-          ],
-          "pages": [
-            {
-              "name": "profile",
-              "components": [
-                {
-                  "name": "edit_form",
-                  "type": "form",
-                  "mode": "update",
-                  "title": "Edit your profile",
-                  "submit_route": "user_settings.profile",
-                  "query_name": "current_user_data",
-                  "fields": [
-                    {
-                      "name": "profile.name",
-                      "title": "Name",
-                      "required": true
-                    },
-                    {
-                      "name": "profile.email",
-                      "title": "E-mail",
-                      "type": "email",
-                      "required": true
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "name": "change_pass",
-              "template": "change_pass"
-            }
-          ],
-          "components": [
-            {
-              "name": "side_menu",
-              "type": "menu",
-              "class": "nav nav-stacked nav-pills",
-              "items": [
-                {
-                  "title": "Profile",
-                  "route": "user_settings.profile"
-                },
-                {
-                  "title": "Change password",
-                  "route": "user_settings.change_pass"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "logout",
-          "template": "logout"
-        }
-      ],
-      "components": [
-        {
-          "name": "left_menu",
-          "type": "menu",
-          "class": "nav navbar-nav",
-          "dest_selector": "#menu",
-          "items": [
-            {
-              "title": "My projects",
-              "route": "projects"
-            }
-          ]
-        },
-        {
-          "name": "right_menu",
-          "type": "menu",
-          "class": "nav navbar-nav navbar-right",
-          "dest_selector": "#menu",
-          "items": [
-            {
-              "title": "Admin",
-              "route": "admin"
-            },
-            {
-              "title": "{{userEmail}}",
-              "items": [
-                {
-                  "title": "Settings",
-                  "route": "user_settings"
-                },
-                {
-                  "title": "Logout",
-                  "route": "logout"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    "packages": {
-      "meteor": [
-        "perak:codemirror",
-        "perak:markdown",
-        "session"
-      ]
-    },
-    "copy_files": []
-  }
-}
+application:
+  title: Cloud IDE
+  theme: bootswatch-cyborg
+  roles:
+    - admin
+    - user
+    - blocked
+  default_role: user
+  collections:
+    - name: projects
+      roles_allowed_to_read:
+        - owner
+      roles_allowed_to_insert: []
+      roles_allowed_to_update:
+        - owner
+      roles_allowed_to_delete:
+        - owner
+      fields:
+        - name: name
+          title: Project name
+          type: string
+          required: true
+        - name: description
+          title: Description
+          type: string
+          input: textarea
+          show_in_dataview: false
+          show_in_read_only_form: true
+          show_in_insert_form: true
+          show_in_edit_form: true
+      after_insert_code: >-
+        var newId = FileSystem.insert({ projectId: doc._id, filename: doc.name,
+        type: 'dir', expanded: true }); FileSystem.insert({ projectId: doc._id,
+        parentId: newId, filename: 'README.md', type: 'item', content: '# ' +
+        doc.name + '\n\n' + doc.description + '\n' });
+    - name: file_system
+      roles_allowed_to_read:
+        - owner
+      roles_allowed_to_insert: []
+      roles_allowed_to_update:
+        - owner
+      roles_allowed_to_delete:
+        - owner
+      fields:
+        - name: filename
+          title: Filename
+          type: string
+          required: true
+        - name: type
+          type: string
+          required: true
+        - name: parentId
+          type: string
+        - name: projectId
+          type: string
+          required: true
+      after_remove_code: 'FileSystem.remove({ parentId: doc._id });'
+  queries:
+    - name: projects
+      collection: projects
+      filter: '{}'
+      options: '{}'
+    - name: project
+      collection: projects
+      find_one: true
+      filter: '{ "_id": ":projectId" }'
+      options: '{}'
+    - name: project_empty
+      collection: projects
+      filter: '{ "_id": null }'
+      options: '{}'
+      find_one: true
+    - name: project_files
+      collection: file_system
+      filter: '{ "projectId": ":projectId" }'
+      options: '{"sort": [ "filename" ] }'
+    - name: file
+      collection: file_system
+      find_one: true
+      filter: '{ "_id": ":fileId" }'
+      options: '{}'
+    - name: admin_users
+      collection: users
+      filter: '{}'
+    - name: admin_user
+      collection: users
+      filter: '{ "_id": ":userId" }'
+      find_one: true
+    - name: users_null
+      collection: users
+      filter: '{ "_id": null }'
+      find_one: true
+    - name: current_user_data
+      collection: users
+      filter: '{ "_id": "Meteor.userId()" }'
+      find_one: true
+  public_zone:
+    pages:
+      - name: home_public
+        components:
+          - name: home_jumbotron
+            title: Cloud IDE
+            title_icon_class: fa fa-cloud
+            type: jumbotron
+            dest_position: before
+            text: >-
+              This example application is built with <a
+              href="http://www.meteorkitchen.com" target="_blank">Meteor
+              Kitchen</a> - source code generator for <a
+              href="https://www.meteor.com/" target="_blank">Meteor.js</a>
+            button_title: Continue &raquo;
+            button_route: login
+      - name: login
+        template: login
+      - name: register
+        template: register
+      - name: forgot_password
+        template: forgot_password
+      - name: reset_password
+        template: reset_password
+        route_params:
+          - resetPasswordToken
+    components:
+      - name: left_menu
+        type: menu
+        class: nav navbar-nav
+        dest_selector: '#menu'
+        items:
+          - title: Home
+            route: home_public
+      - name: right_menu
+        type: menu
+        class: nav navbar-nav navbar-right
+        dest_selector: '#menu'
+        items:
+          - title: Register
+            route: register
+          - title: Login
+            route: login
+  private_zone:
+    pages:
+      - name: projects
+        components:
+          - name: list
+            title: My projects
+            type: dataview
+            query_name: projects
+            insert_route: projects.insert
+            details_route: projects.main
+            details_route_params:
+              - name: projectId
+                value: this._id
+              - name: fileId
+                value: null
+            edit_route: projects.edit
+            edit_route_params:
+              - name: projectId
+                value: this._id
+              - name: fileId
+                value: null
+        pages:
+          - name: main
+            title: '{{project.name}}'
+            template: page_subcontent_navbar
+            container_class: container-fluid
+            route_params:
+              - projectId
+              - fileId
+            query_name: project
+            back_route: projects
+            pages:
+              - name: editor
+                container_class: >-
+                  col-xs-7 col-xs-offset-5 col-sm-9 col-sm-offset-3 col-md-10
+                  col-md-offset-2
+                parent_layout: true
+                force_yield_subpages: true
+                components:
+                  - name: sidebar
+                    type: div
+                    class: col-xs-5 col-sm-3 col-md-2 sidebar
+                    dest_selector: .page-container
+                    dest_position: before
+                  - name: tree
+                    type: tree_view
+                    dest_selector: .sidebar
+                    query_name: project_files
+                    item_name_field: filename
+                    item_type_field: type
+                    item_route: projects.main.editor
+                    item_route_params:
+                      - name: projectId
+                        value: this.projectId
+                      - name: fileId
+                        value: this._id
+                    folder_route: projects.main.editor
+                    folder_route_params:
+                      - name: projectId
+                        value: this.projectId
+                      - name: fileId
+                        value: this._id
+                  - name: view
+                    type: custom_component
+                    title: '{{file.filename}}'
+                    custom_template: files/main/main
+                    query_name: file
+            components:
+              - name: left_menu
+                type: menu
+                class: nav navbar-nav
+                items:
+                  - title: Editor
+                    route: projects.main.editor
+                    route_params:
+                      - name: projectId
+                        value: this.params.projectId
+                      - name: fileId
+                        value: this.params.fileId
+              - name: right_menu
+                type: menu
+                class: nav navbar-nav navbar-right
+                items: []
+          - name: insert
+            components:
+              - name: form
+                type: form
+                mode: insert
+                title: New project
+                query_name: project_empty
+                submit_route: projects.main
+                submit_route_params:
+                  - name: projectId
+                    value: newId
+                  - name: fileId
+                    value: null
+                cancel_route: projects
+          - name: edit
+            route_params:
+              - projectId
+            components:
+              - name: form
+                type: form
+                mode: update
+                title: Edit project settings
+                query_name: project
+                submit_route: projects
+                cancel_route: projects
+      - name: admin
+        roles:
+          - admin
+        pages:
+          - name: users
+            components:
+              - name: view
+                type: data_view
+                title: Users
+                text_if_empty: No users yet
+                query_name: admin_users
+                fields:
+                  - name: profile.name
+                    title: Name
+                  - name: profile.email
+                    title: E-mail
+                  - name: roles
+                    title: Role
+                insert_route: admin.users.insert
+                edit_route: admin.users.edit
+                edit_route_params:
+                  - name: userId
+                    value: this._id
+                details_route: admin.users.details
+                details_route_params:
+                  - name: userId
+                    value: this._id
+            pages:
+              - name: details
+                route_params:
+                  - userId
+                components:
+                  - name: details_form
+                    type: form
+                    mode: read_only
+                    title: User details
+                    query_name: admin_user
+                    fields:
+                      - name: profile.name
+                        title: Name
+                      - name: profile.email
+                        title: E-mail
+                        type: email
+                      - name: roles
+                        title: Role
+                    close_route: admin.users
+                    back_route: admin.users
+              - name: insert
+                components:
+                  - name: insert_form
+                    type: form
+                    mode: insert
+                    title: Add new user
+                    submit_route: admin.users
+                    cancel_route: admin.users
+                    query_name: users_null
+                    fields:
+                      - name: profile.name
+                        title: Name
+                        required: true
+                      - name: profile.email
+                        title: E-mail
+                        type: email
+                        required: true
+                      - name: password
+                        title: Password
+                        input: password
+                        required: true
+              - name: edit
+                route_params:
+                  - userId
+                components:
+                  - name: edit_form
+                    type: form
+                    mode: update
+                    title: Edit user
+                    submit_route: admin.users
+                    cancel_route: admin.users
+                    query_name: admin_user
+                    fields:
+                      - name: profile.name
+                        title: Name
+                        required: true
+                      - name: profile.email
+                        title: E-mail
+                        type: email
+                        required: true
+                      - name: roles
+                        type: array
+                        title: Role
+                        input: radio
+                        input_items:
+                          - value: user
+                            title: User
+                          - value: admin
+                            title: Admin
+                          - value: blocked
+                            title: Blocked
+        components:
+          - name: side_menu
+            type: menu
+            class: nav nav-stacked nav-pills
+            items:
+              - title: Users
+                route: admin.users
+      - name: user_settings
+        roles:
+          - user
+          - admin
+        pages:
+          - name: profile
+            components:
+              - name: edit_form
+                type: form
+                mode: update
+                title: Edit your profile
+                submit_route: user_settings.profile
+                query_name: current_user_data
+                fields:
+                  - name: profile.name
+                    title: Name
+                    required: true
+                  - name: profile.email
+                    title: E-mail
+                    type: email
+                    required: true
+          - name: change_pass
+            template: change_pass
+        components:
+          - name: side_menu
+            type: menu
+            class: nav nav-stacked nav-pills
+            items:
+              - title: Profile
+                route: user_settings.profile
+              - title: Change password
+                route: user_settings.change_pass
+      - name: logout
+        template: logout
+    components:
+      - name: left_menu
+        type: menu
+        class: nav navbar-nav
+        dest_selector: '#menu'
+        items:
+          - title: My projects
+            route: projects
+      - name: right_menu
+        type: menu
+        class: nav navbar-nav navbar-right
+        dest_selector: '#menu'
+        items:
+          - title: Admin
+            route: admin
+          - title: '{{userEmail}}'
+            items:
+              - title: Settings
+                route: user_settings
+              - title: Logout
+                route: logout
+  packages:
+    meteor:
+      - 'perak:codemirror'
+      - 'perak:markdown'
+      - session
+  copy_files: []
+

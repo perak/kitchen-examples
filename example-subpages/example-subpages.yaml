@@ -9,8 +9,17 @@ application:
           - name: home_jumbotron
             title: Example application
             type: jumbotron
-            text: '<b>This <a href="https://www.meteor.com" target="_blank">Meteor</a> application is made with <a href="http://www.meteorkitchen.com" target="_blank">meteor-kitchen</a> without manual coding.</b><br />It demonstrates how to create pages with side-menus and tab-menus pointing to subpages.<br />Source code (input file for generator) is <a href="https://github.com/perak/kitchen-examples/tree/master/example-subpages" target="_blank">here</a>.'
-            button_title: 'Continue &raquo;'
+            text: >-
+              <b>This <a href="https://www.meteor.com"
+              target="_blank">Meteor</a> application is made with <a
+              href="http://www.meteorkitchen.com"
+              target="_blank">meteor-kitchen</a> without manual coding.</b><br
+              />It demonstrates how to create pages with side-menus and
+              tab-menus pointing to subpages.<br />Source code (input file for
+              generator) is <a
+              href="https://github.com/perak/kitchen-examples/tree/master/example-subpages"
+              target="_blank">here</a>.
+            button_title: Continue &raquo;
             button_route: cool_page
       - name: cool_page
         pages:

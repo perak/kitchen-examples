@@ -7,16 +7,24 @@ application:
     footer_class: ''
     pages:
       - name: home
-        title: 'Hello semantic-ui!'
-        text: 'Just started adding support for <a href="http://semantic-ui.com/" target="_blank">semantic-ui</a> into <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> - code generator for <a href="https://www.meteor.com/" target="_blank">Meteor.js</a>. Stay tuned, it will be fully supported in next few days.'
+        title: Hello semantic-ui!
+        text: >-
+          This application is built with <a href="http://www.meteorkitchen.com"
+          target="_blank">Meteor Kitchen</a> - source code generator for <a
+          href="https://www.meteor.com/" target="_blank">Meteor.js</a>. Stay
+          tuned, it will be fully supported in next few days.
       - name: about
         title: About
-        text: 'This example application is built with <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> - code generator for Meteor.js. Source code (input file for generator) is <a href="https://github.com/perak/kitchen-examples/tree/master/example-semantic" target="_blank">here</a>.'
+        text: >-
+          This example application is built with <a
+          href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a>
+          - source code generator for Meteor.js. Source code (input file for
+          generator) is <a
+          href="https://github.com/perak/kitchen-examples/tree/master/example-semantic"
+          target="_blank">here</a>.
     components:
       - name: main_menu
         type: menu
-        class: ui large secondary pointing menu
-        items_container_class: ui container
         items:
           - title: Home
             route: home

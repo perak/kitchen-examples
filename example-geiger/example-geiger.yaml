@@ -15,17 +15,25 @@ application:
   queries:
     - name: sensors
       collection: sensors
-      filter: {}
-      options:
-        sort:
-          - - createdAt
-            - asc
-  server_startup_code: "Sensors.mqttConnect('mqtt://test.mosquitto.org', ['revspace/sensors/geiger'], { insert: true, insertLimit: 50 });"
+      filter: '{}'
+      options: '{ "sort": [ ["createdAt", "asc"] ] }'
+  server_startup_code: >-
+    Sensors.mqttConnect('mqtt://test.mosquitto.org',
+    ['revspace/sensors/geiger'], { insert: true, insertLimit: 50 });
   free_zone:
     pages:
       - name: home
-        title: 'Meteor Kitchen & IoT (Internet of Things) example'
-        text: 'Showing geiger sensor from <a href="https://revspace.nl" target="_blank">RevSpace</a> in real-time. Server is connected to <a href="http://test.mosquitto.org" target="_blank">mqtt://test.mosquitto.org</a> MQTT broker and subscribed to "revspace/sensors/geiger" topic. Received messages are written into "Sensors" collection and shown to users.<br />Source code (input file for generator) is <a href="https://github.com/perak/kitchen-examples/tree/master/example-geiger" target="_blank">here</a>.'
+        title: Meteor Kitchen & IoT (Internet of Things) example
+        text: >-
+          Showing geiger sensor from <a href="https://revspace.nl"
+          target="_blank">RevSpace</a> in real-time. Server is connected to <a
+          href="http://test.mosquitto.org"
+          target="_blank">mqtt://test.mosquitto.org</a> MQTT broker and
+          subscribed to "revspace/sensors/geiger" topic. Received messages are
+          written into "Sensors" collection and shown to users.<br />Source code
+          (input file for generator) is <a
+          href="https://github.com/perak/kitchen-examples/tree/master/example-geiger"
+          target="_blank">here</a>.
         components:
           - name: chart
             title: Radiation level (CPM)
@@ -36,7 +44,13 @@ application:
             query_params: []
       - name: about
         title: About
-        text: 'This example application is built with <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> - code generator for Meteor.js<br />Source code (input file for generator) is <a href="https://github.com/perak/kitchen-examples/tree/master/example-geiger" target="_blank">here</a>.'
+        text: >-
+          This example application is built with <a
+          href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a>
+          - source code generator for Meteor.js<br />Source code (input file for
+          generator) is <a
+          href="https://github.com/perak/kitchen-examples/tree/master/example-geiger"
+          target="_blank">here</a>.
     components:
       - name: main_menu
         type: menu

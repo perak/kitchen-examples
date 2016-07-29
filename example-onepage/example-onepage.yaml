@@ -1,7 +1,7 @@
 application:
   title: Example application
   theme: bootswatch-cosmo
-  footer_text: 'Copyright &copy; Your Website 2015'
+  footer_text: Copyright &copy; Your Website 2015
   free_zone:
     pages:
       - name: home
@@ -63,8 +63,15 @@ application:
                     input: textarea
                     required: true
                 submit_button_title: Send
-                submit_code: "Meteor.call('sendMail', { from: values.email, to: values.email, subject: 'Message from ' + values.name, text: values.message }, function(e) {  if(e) errorAction(e.message); else submitAction('Your message is sent. Thank you for contacting us! :)'); } );"
-        template_rendered_code: "$('section, .jumbotron').css('min-height', $(window).height() + 'px'); window.scrollTo(0, 0);"
+                submit_code: >-
+                  Meteor.call('sendMail', { from: values.email, to:
+                  values.email, subject: 'Message from ' + values.name, text:
+                  values.message }, function(e) {  if(e) errorAction(e.message);
+                  else submitAction('Your message is sent. Thank you for
+                  contacting us! :)'); } );
+        template_rendered_code: >-
+          $('section, .jumbotron').css('min-height', $(window).height() + 'px');
+          window.scrollTo(0, 0);
     components:
       - name: main_menu
         type: menu

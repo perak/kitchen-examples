@@ -70,57 +70,57 @@
 			{
 				"name": "projects",
 				"collection": "projects",
-				"filter": {},
-				"options": {}
+				"filter": "{}",
+				"options": "{}"
 			},
 			{
 				"name": "project",
 				"collection": "projects",
 				"find_one": true,
-				"filter": { "_id": ":projectId" },
-				"options": {}
+				"filter": "{ \"_id\": \":projectId\" }",
+				"options": "{}"
 			},
 			{
 				"name": "project_empty",
 				"collection": "projects",
-				"filter": { "_id": null },
-				"options": {},
+				"filter": "{ \"_id\": null }",
+				"options": "{}",
 				"find_one": true
 			},
 			{
 				"name": "project_files",
 				"collection": "file_system",
-				"filter": { "projectId": ":projectId" },
-				"options": {"sort": [ "filename" ] }
+				"filter": "{ \"projectId\": \":projectId\" }",
+				"options": "{\"sort\": [ \"filename\" ] }"
 			},
 			{
 				"name": "file",
 				"collection": "file_system",
 				"find_one": true,
-				"filter": { "_id": ":fileId" },
-				"options": {}
+				"filter": "{ \"_id\": \":fileId\" }",
+				"options": "{}"
 			},
 			{
 				"name": "admin_users",
 				"collection": "users",
-				"filter": {}
+				"filter": "{}"
 			},
 			{
 				"name": "admin_user",
 				"collection": "users",
-				"filter": { "_id": ":userId" },
+				"filter": "{ \"_id\": \":userId\" }",
 				"find_one": true
 			},
 			{
 				"name": "users_null",
 				"collection": "users",
-				"filter": { "_id": null },
+				"filter": "{ \"_id\": null }",
 				"find_one": true
 			},
 			{
 				"name": "current_user_data",
 				"collection": "users",
-				"filter": { "_id": "Meteor.userId()" },
+				"filter": "{ \"_id\": \"Meteor.userId()\" }",
 				"find_one": true
 			}
 		],
@@ -136,7 +136,7 @@
 							"title_icon_class": "fa fa-cloud",
 							"type": "jumbotron",
 							"dest_position": "before",
-							"text": "This example application is built with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">Meteor Kitchen</a> - code generator for <a href=\"https://www.meteor.com/\" target=\"_blank\">Meteor.js</a>",
+							"text": "This example application is built with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">Meteor Kitchen</a> - source code generator for <a href=\"https://www.meteor.com/\" target=\"_blank\">Meteor.js</a>",
 							"button_title": "Continue &raquo;",
 							"button_route": "login"
 						}
@@ -239,7 +239,7 @@
 											"folder_route_params": [
 												{  "name": "projectId", "value": "this.projectId" },
 												{  "name": "fileId", "value": "this._id" }
-											],
+											]
 										},
 										{
 											"name": "view",

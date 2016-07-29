@@ -5,7 +5,7 @@ In home page I want jumbotron with title: "This application is written in human 
 Please create one collection: customers.
 In customers collection I want three fields: name, address and e-mail.
 In customers page I want CRUD for customers collection.
-In about page I want text: "This application is written in human language using Meteor Kitchen, code generator for Meteor".
+In about page I want text: "This application is written in human language using Meteor Kitchen, source code generator for Meteor".
 
 That's it, please create this application for me.
 

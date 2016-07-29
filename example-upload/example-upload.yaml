@@ -18,13 +18,12 @@ application:
   queries:
     - name: gallery
       collection: gallery
-      filter: {}
-      options: {}
+      filter: '{}'
+      options: '{}'
     - name: gallery_empty
       collection: gallery
-      filter:
-        _id: null
-      options: {}
+      filter: '{ "_id": null }'
+      options: '{}'
       find_one: true
   free_zone:
     pages:

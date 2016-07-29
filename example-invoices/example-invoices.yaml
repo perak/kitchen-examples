@@ -1,7 +1,9 @@
 application:
   title: Example application
   theme: bootswatch-paper
-  on_user_created_code: "Customers.insert({ name: 'Chuck Norris', email: 'internet@chucknorris.com', ownerId: user._id });"
+  on_user_created_code: >-
+    Customers.insert({ name: 'Chuck Norris', email: 'internet@chucknorris.com',
+    ownerId: user._id });
   collections:
     - name: customers
       fields:
@@ -82,7 +84,7 @@ application:
         - owner
       roles_allowed_to_delete:
         - owner
-      before_insert_code: 'if(!doc.totalAmount) doc.totalAmount = 0;'
+      before_insert_code: if(!doc.totalAmount) doc.totalAmount = 0;
     - name: invoice_items
       fields:
         - name: description
@@ -114,73 +116,77 @@ application:
         - owner
       roles_allowed_to_delete:
         - owner
-      before_insert_code: 'doc.amount = doc.quantity * doc.price;'
-      before_update_code: 'if(!modifier.$set) return; var quantity = modifier.$set.quantity || doc.quantity; var price = modifier.$set.price || doc.price; modifier.$set.amount = quantity * price;'
-      after_insert_code: 'var sum = 0; InvoiceItems.find({ invoiceId: doc.invoiceId }).map(function(item) { sum += item.amount; }); Invoices.update({ _id: doc.invoiceId }, { $set: { totalAmount: sum }});'
-      after_update_code: 'var sum = 0; InvoiceItems.find({ invoiceId: doc.invoiceId }).map(function(item) { sum += item.amount; }); Invoices.update({ _id: doc.invoiceId }, { $set: { totalAmount: sum }});'
-      after_remove_code: 'var sum = 0; InvoiceItems.find({ invoiceId: doc.invoiceId }).map(function(item) { sum += item.amount; }); Invoices.update({ _id: doc.invoiceId }, { $set: { totalAmount: sum }});'
+      before_insert_code: doc.amount = doc.quantity * doc.price;
+      before_update_code: >-
+        if(!modifier.$set) return; var quantity = modifier.$set.quantity ||
+        doc.quantity; var price = modifier.$set.price || doc.price;
+        modifier.$set.amount = quantity * price;
+      after_insert_code: >-
+        var sum = 0; InvoiceItems.find({ invoiceId: doc.invoiceId
+        }).map(function(item) { sum += item.amount; }); Invoices.update({ _id:
+        doc.invoiceId }, { $set: { totalAmount: sum }});
+      after_update_code: >-
+        var sum = 0; InvoiceItems.find({ invoiceId: doc.invoiceId
+        }).map(function(item) { sum += item.amount; }); Invoices.update({ _id:
+        doc.invoiceId }, { $set: { totalAmount: sum }});
+      after_remove_code: >-
+        var sum = 0; InvoiceItems.find({ invoiceId: doc.invoiceId
+        }).map(function(item) { sum += item.amount; }); Invoices.update({ _id:
+        doc.invoiceId }, { $set: { totalAmount: sum }});
   queries:
     - name: customer_list
       collection: customers
-      filter: {}
-      options:
-        transform: 'function(doc) { var sum = 0; Invoices.find({ customerId: doc._id }).map(function(item) { if(item.totalAmount) sum += item.totalAmount; }); doc.totalAmount = sum; return doc; }'
-        sort:
-          - name
+      filter: '{}'
+      options: >-
+        { "transform": "function(doc) { var sum = 0; Invoices.find({ customerId:
+        doc._id }).map(function(item) { if(item.totalAmount) sum +=
+        item.totalAmount; }); doc.totalAmount = sum; return doc; }", "sort":
+        ["name"] }
       related_queries:
         - name: invoice_list
     - name: customers_empty
       collection: customers
-      filter:
-        _id: null
+      filter: '{"_id": null}'
       find_one: true
     - name: customer_details
       collection: customers
       find_one: true
-      filter:
-        _id: ':customerId'
-      options:
-        transform: 'function(doc) { var sum = 0; Invoices.find({ customerId: doc._id }).map(function(item) { sum += item.totalAmount; }); doc.totalAmount = sum; return doc; }'
+      filter: '{ "_id": ":customerId" }'
+      options: >-
+        { "transform": "function(doc) { var sum = 0; Invoices.find({ customerId:
+        doc._id }).map(function(item) { sum += item.totalAmount; });
+        doc.totalAmount = sum; return doc; }" }
       related_queries:
         - name: invoice_list
     - name: invoice_list
       collection: invoices
       filter: {}
-      options:
-        sort:
-          - - invoiceNumber
-            - desc
+      options: '{ "sort": [[ "invoiceNumber", "desc"]] }'
     - name: invoices_empty
       collection: invoices
-      filter:
-        _id: null
-      options: {}
+      filter: '{ "_id": null }'
+      options: '{}'
       find_one: true
       related_queries:
         - name: invoice_list
     - name: invoice_details
       collection: invoices
-      filter:
-        _id: ':invoiceId'
+      filter: '{ "_id": ":invoiceId" }'
       find_one: true
     - name: invoice_items
       collection: invoice_items
-      filter:
-        invoiceId: ':invoiceId'
+      filter: '{ "invoiceId": ":invoiceId" }'
     - name: invoice_items_empty
       collection: invoice_items
-      filter:
-        _id: null
+      filter: '{ "_id": null }'
       find_one: true
     - name: invoice_item
       collection: invoice_items
-      filter:
-        _id: ':itemId'
+      filter: '{ "_id": ":itemId" }'
       find_one: true
     - name: current_user_data
       collection: users
-      filter:
-        _id: Meteor.userId()
+      filter: '{ "_id": "Meteor.userId()" }'
       find_one: true
   public_zone:
     pages:
@@ -190,8 +196,17 @@ application:
           - name: home_jumbotron
             title: Example application
             type: jumbotron
-            text: '<b>This <a href="https://www.meteor.com" target="_blank">Meteor</a> application is made with <a href="http://www.meteorkitchen.com" target="_blank">meteor-kitchen</a> without manual coding.</b><br />It shows how to work with DataViews, Forms with dates and lookup fields, master-detail relations etc.<br />Source code (input file for generator) is <a href="https://github.com/perak/kitchen-examples/tree/master/example-invoices" target="_blank">here</a>.'
-            button_title: 'Continue &raquo;'
+            text: >-
+              <b>This <a href="https://www.meteor.com"
+              target="_blank">Meteor</a> application is made with <a
+              href="http://www.meteorkitchen.com"
+              target="_blank">meteor-kitchen</a> without manual coding.</b><br
+              />It shows how to work with DataViews, Forms with dates and lookup
+              fields, master-detail relations etc.<br />Source code (input file
+              for generator) is <a
+              href="https://github.com/perak/kitchen-examples/tree/master/example-invoices"
+              target="_blank">here</a>.
+            button_title: Continue &raquo;
             button_route: login
       - name: login
         template: login
@@ -297,7 +312,12 @@ application:
                 mode: insert
                 title: New invoice
                 query_name: invoices_empty
-                helpers_code: "'nextInvoiceNumber': function() { var max = 0; var invoiceNumbers = Invoices.find({}, { fields: { invoiceNumber: 1 }}).fetch(); _.each(invoiceNumbers, function(doc) { var intNum = parseInt(doc.invoiceNumber); if(!isNaN(intNum) && intNum > max) max = intNum; }); return max + 1; }"
+                helpers_code: >-
+                  'nextInvoiceNumber': function() { var max = 0; var
+                  invoiceNumbers = Invoices.find({}, { fields: { invoiceNumber:
+                  1 }}).fetch(); _.each(invoiceNumbers, function(doc) { var
+                  intNum = parseInt(doc.invoiceNumber); if(!isNaN(intNum) &&
+                  intNum > max) max = intNum; }); return max + 1; }
                 submit_route: invoices.details
                 submit_route_params:
                   - name: invoiceId

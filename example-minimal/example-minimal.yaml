@@ -4,10 +4,14 @@ application:
     pages:
       - name: home
         title: Home page
-        text: 'Hello world!'
+        text: Hello world!
       - name: about
         title: About
-        text: 'This example application is built with <a href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a> - code generator for <a href="https://www.meteor.com" target="_blank">Meteor.js</a>'
+        text: >-
+          This example application is built with <a
+          href="http://www.meteorkitchen.com" target="_blank">Meteor Kitchen</a>
+          - source code generator for <a href="https://www.meteor.com"
+          target="_blank">Meteor.js</a>
     components:
       - name: main_menu
         type: menu

@@ -1,0 +1,36 @@
+{
+	"application": {
+		"free_zone": {
+			"components": [
+				{
+					"name": "menu",
+					"type": "menu",
+					"items": [
+						{
+							"title": "Home",
+							"route": "home"
+						}
+					]
+				}
+			],
+			"pages": [
+				{
+					"name": "home",
+					"components": [
+						{
+							"name": "rest_call",
+							"type": "custom_component",
+							"custom_template": "files/client/rest_call"
+						}
+					]
+				}
+			]
+		},
+		"copy_files": [
+			{
+				"source": "files/server/method_starwars.js",
+				"dest": "SERVER_METHODS_DIR/star_wars.js"
+			}
+		]
+	}
+}

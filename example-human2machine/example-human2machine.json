@@ -3,7 +3,7 @@
 		"title": "human2machine",
 		"theme": "bootswatch-superhero",
 
-		"footer_text": "<a href=\"https://www.npmjs.com/package/human2machine\" target=\"_blank\">human2machine</a> converter built with (and for) <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">Meteor Kitchen</a> - code generator for Meteor.js",
+		"footer_text": "<a href=\"https://www.npmjs.com/package/human2machine\" target=\"_blank\">human2machine</a> converter built with (and for) <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">Meteor Kitchen</a> - source code generator for Meteor.js",
 
 		"collections": [
 			{
@@ -15,8 +15,8 @@
 			{
 				"name": "application",
 				"collection": "applications",
-				"filter": { "_id": ":appId" },
-				"options": {},
+				"filter": "{ \"_id\": \":appId\" }",
+				"options": "{}",
 				"find_one": true
 			}
 		],
