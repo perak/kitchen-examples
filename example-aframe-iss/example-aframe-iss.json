@@ -1,0 +1,32 @@
+{
+	"application": {
+		"title": "Example application",
+		"templating": "react",
+		"frontend": "aframe",
+
+		"free_zone": {
+			"background-image": "",
+
+			"pages": [
+				{ "name": "home", "background_image": "/images/iss.jpg" },
+				{ "name": "kibo", "background_image": "/images/kibo.jpg" },
+				{ "name": "destiny", "background_image": "/images/destiny.jpg" }
+			],
+
+			"components": [
+				{ 
+					"name": "main_menu",
+					"type": "menu",
+					"items": [
+						{ "title": "Home", "route": "home" },
+						{ "title": "Kibo", "route": "kibo" },
+						{ "title": "Destiny", "route": "destiny" }
+					]
+				}
+			]
+		},
+		"copy_files": [
+			{ "source": "assets/images", "dest": "PUBLIC_IMAGES_DIR/" }
+		]
+	}
+}
