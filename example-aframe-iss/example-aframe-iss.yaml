@@ -3,7 +3,7 @@ application:
   templating: react
   frontend: aframe
   free_zone:
-    background-image: ''
+    background_image: /images/milky-way.jpg
     pages:
       - name: home
         background_image: /images/iss.jpg
