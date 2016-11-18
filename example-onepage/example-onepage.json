@@ -4,7 +4,7 @@
 
 		"theme": "bootswatch-cosmo",
 
-		"footer_text": "Copyright &copy; Your Website 2015",
+		"footer_text": "Copyright &copy; Your Website",
 
 		"free_zone": {
 
@@ -17,13 +17,13 @@
 							"type": "jumbotron",
 							"dest_position": "before",
 
-							"image_url": "/images/jumbotron-bg.png",
+							"image_url": "/images/jumbotron-bg.jpg",
 
 							"components": [
 								{
 									"name": "jumbotron_content",
 									"type": "custom_component",
-									"custom_template": "files/jumbotron_content.html"
+									"custom_template": "files/jumbotron_content"
 								}
 							]
 						},
@@ -42,7 +42,7 @@
 								{
 									"name": "three_columns",
 									"type": "custom_component",
-									"custom_template": "files/three_columns.html"
+									"custom_template": "files/three_columns"
 								}
 							]
 						},
@@ -95,7 +95,7 @@
 										{ "name": "message", "title": "Message", "input": "textarea", "required": true }
 									],
 									"submit_button_title": "Send",
-									"submit_code": "Meteor.call('sendMail', { from: values.email, to: values.email, subject: 'Message from ' + values.name, text: values.message }, function(e) {  if(e) errorAction(e.message); else submitAction('Your message is sent. Thank you for contacting us! :)'); } );"
+									"submit_code": "Meteor.call('sendMail', { from: values.email, to: values.email, subject: 'Message from ' + values.name, text: values.message }, function(e, r) {  if(e) errorAction(e.message); else submitAction(r, 'Your message is sent. Thank you for contacting us! :)'); } );"
 								}
 							]
 						}
@@ -125,7 +125,7 @@
 
 		"copy_files": [
 			{ "source": "files/styles.css", "dest": "CLIENT_STYLES_DIR/styles.css" },
-			{ "source": "files/jumbotron-bg.png", "dest": "PUBLIC_IMAGES_DIR/jumbotron-bg.png" }
+			{ "source": "files/jumbotron-bg.jpg", "dest": "PUBLIC_IMAGES_DIR/jumbotron-bg.jpg" }
 		]
 	}
 }

@@ -1,9 +1,6 @@
 application:
   title: Example application
   theme: bootswatch-paper
-  on_user_created_code: >-
-    Customers.insert({ name: 'Chuck Norris', email: 'internet@chucknorris.com',
-    ownerId: user._id });
   collections:
     - name: customers
       fields:
@@ -321,7 +318,7 @@ application:
                 submit_route: invoices.details
                 submit_route_params:
                   - name: invoiceId
-                    value: newId
+                    value: result
                 cancel_route: invoices
           - name: details
             template: page_subcontent_tabnav

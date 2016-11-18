@@ -25,12 +25,12 @@ application:
           title: Active
           type: bool
           input: checkbox
-          display_helper: booleanToYesNo
           exportable: true
   queries:
     - name: customers
       collection: customers
       filter: '{}'
+      options: '{ "sort": { "name": 1 } }'
     - name: customers_empty
       collection: customers
       filter: '{ "_id": null }'

@@ -96,7 +96,6 @@ application:
                     title: E-mail
                   - name: roles
                     title: Role
-                insert_route: admin.users.insert
                 edit_route: admin.users.edit
                 edit_route_params:
                   - name: userId
@@ -126,28 +125,6 @@ application:
                         title: Role
                     close_route: admin.users
                     back_route: admin.users
-              - name: insert
-                components:
-                  - name: insert_form
-                    type: form
-                    mode: insert
-                    title: Add new user
-                    submit_route: admin.users
-                    cancel_route: admin.users
-                    query_name: users_null
-                    query_params: []
-                    fields:
-                      - name: profile.name
-                        title: Name
-                        required: true
-                      - name: profile.email
-                        title: E-mail
-                        type: email
-                        required: true
-                      - name: password
-                        title: Password
-                        input: password
-                        required: true
               - name: edit
                 route_params:
                   - userId
@@ -167,7 +144,7 @@ application:
                       - name: profile.email
                         title: E-mail
                         type: email
-                        required: true
+                        input: read-only
                       - name: roles
                         type: array
                         title: Role
@@ -203,10 +180,6 @@ application:
                 fields:
                   - name: profile.name
                     title: Name
-                    required: true
-                  - name: profile.email
-                    title: E-mail
-                    type: email
                     required: true
                   - name: profile.facebook
                     title: Facebook URL
