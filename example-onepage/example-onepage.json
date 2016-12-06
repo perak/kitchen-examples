@@ -2,7 +2,9 @@
 	"application": {
 		"title": "Example application",
 
+		"frontend": "bootstrap3",
 		"theme": "bootswatch-cosmo",
+		"animate": true,
 
 		"footer_text": "Copyright &copy; Your Website",
 
@@ -32,6 +34,7 @@
 							"name": "section1",
 							"type": "section",
 							"dest_position": "before",
+							"class": "animate a-bounceInLeft",
 							"components": [
 								{
 									"name": "content1",
@@ -51,7 +54,7 @@
 							"name": "section2",
 							"type": "section",
 							"dest_position": "before",
-							"class": "bg-blue",
+							"class": "bg-blue animate a-bounceInRight",
 							"components": [
 								{
 									"name": "content2",
@@ -65,6 +68,7 @@
 							"name": "section3",
 							"type": "section",
 							"dest_position": "before",
+							"class": "animate a-bounceInLeft",
 							"components": [
 								{
 									"name": "content3",
@@ -78,7 +82,7 @@
 							"name": "section_contact",
 							"type": "section",
 							"dest_position": "before",
-							"class": "bg-blue",
+							"class": "bg-blue animate a-bounceInRight",
 							"components": [
 								{
 									"name": "content_contact",
