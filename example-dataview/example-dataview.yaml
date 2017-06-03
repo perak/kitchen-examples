@@ -50,7 +50,6 @@ application:
             route: customers
     pages:
       - name: home
-        title: ''
         components:
           - name: home_jumbotron
             title: Example application

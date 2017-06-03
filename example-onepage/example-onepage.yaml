@@ -54,6 +54,7 @@ application:
               - name: contact
                 type: form
                 mode: insert
+                autofocus: false
                 fields:
                   - name: name
                     title: Your name

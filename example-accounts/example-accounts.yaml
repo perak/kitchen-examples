@@ -8,7 +8,6 @@ application:
       filter: '{ "_id": "Meteor.userId()" }'
       find_one: true
   public_zone:
-    navbar_class: navbar-inverse navbar-fixed-top
     pages:
       - name: home_public
         title: ''
@@ -41,22 +40,17 @@ application:
     components:
       - name: left_menu
         type: menu
-        class: nav navbar-nav
-        dest_selector: '#menu'
         items:
           - title: Home
             route: home_public
       - name: right_menu
         type: menu
-        class: nav navbar-nav navbar-right
-        dest_selector: '#menu'
         items:
           - title: Register
             route: register
           - title: Login
             route: login
   private_zone:
-    navbar_class: navbar-default navbar-fixed-top
     pages:
       - name: home_private
         title: 'Welcome {{userFullName}}!'
@@ -99,15 +93,11 @@ application:
     components:
       - name: left_menu
         type: menu
-        class: nav navbar-nav
-        dest_selector: '#menu'
         items:
           - title: Home
             route: home_private
       - name: right_menu
         type: menu
-        class: nav navbar-nav navbar-right
-        dest_selector: '#menu'
         items:
           - title: '{{userEmail}}'
             items:

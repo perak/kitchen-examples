@@ -2,8 +2,8 @@ application:
   collections:
     - name: files
       type: file_collection
-      storage_adapters:
-        - gridfs
+      storage_adapter_options:
+        gridfs: {}
     - name: gallery
       type: collection
       fields:

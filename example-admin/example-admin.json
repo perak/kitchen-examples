@@ -64,8 +64,6 @@
 				{
 					"name": "left_menu",
 					"type": "menu",
-					"class": "nav navbar-nav",
-					"dest_selector": "#menu",
 					"items": [
 						{ "title": "Home", "route": "home_public" }
 					]
@@ -74,8 +72,6 @@
 				{
 					"name": "right_menu",
 					"type": "menu",
-					"class": "nav navbar-nav navbar-right",
-					"dest_selector": "#menu",
 					"items": [
 						{ "title": "Register", "route": "register" },
 						{ "title": "Login", "route": "login" }
@@ -240,8 +236,6 @@
 				{
 					"name": "left_menu",
 					"type": "menu",
-					"class": "nav navbar-nav",
-					"dest_selector": "#menu",
 					"items": [
 						{ "title": "Home", "route": "home_private", "icon_class": "fa fa-home" }
 					]
@@ -249,8 +243,6 @@
 				{
 					"name": "right_menu",
 					"type": "menu",
-					"class": "nav navbar-nav navbar-right",
-					"dest_selector": "#menu",
 					"items": [
 						{ "title": "Admin", "route": "admin", "icon_class": "fa fa-wrench" },
 

@@ -93,6 +93,7 @@
 									"name": "contact",
 									"type": "form",
 									"mode": "insert",
+									"autofocus": false,
 									"fields": [
 										{ "name": "name", "title": "Your name", "required": true },
 										{ "name": "email", "title": "Your e-mail", "type": "email", "required": true },

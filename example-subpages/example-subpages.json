@@ -2,6 +2,8 @@
 	"application": {
 		"title": "Example application",
 
+		"frontend": "bootstrap3",
+
 		"theme": "bootswatch-simplex",
 
 		"free_zone": {

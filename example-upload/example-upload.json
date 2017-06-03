@@ -4,7 +4,9 @@
 			{
 				"name": "files",
 				"type": "file_collection",
-				"storage_adapters": ["gridfs"]
+				"storage_adapter_options": { 
+					"gridfs": {}
+				}
 			},
 
 			{
