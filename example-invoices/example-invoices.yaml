@@ -38,7 +38,7 @@ application:
       fields:
         - name: invoiceNumber
           title: Invoice number
-          default: '{{nextInvoiceNumber}}'
+          default: ''
           required: true
           exportable: true
         - name: date
@@ -328,7 +328,7 @@ application:
               - name: details_form
                 type: form
                 mode: read_only
-                title: 'Invoice #{{invoice_details.invoiceNumber}}'
+                title: Invoice details
                 layout: horizontal
                 query_name: invoice_details
                 back_route: invoices
