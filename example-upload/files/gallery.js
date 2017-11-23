@@ -15,7 +15,7 @@ Template.TEMPLATE_NAME.events({
 					label: "Yes",
 					className: "btn-success",
 					callback: function() {
-						COLLECTION_VAR.remove({ _id: self._id });
+						Meteor.call("COLLECTION_REMOVE_METHOD", self._id);
 					}
 				},
 				danger: {

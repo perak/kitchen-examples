@@ -332,7 +332,7 @@ application:
                 layout: horizontal
                 query_name: invoice_details
                 back_route: invoices
-            force_yield_subpages: true
+            render_subpages: always
             pages:
               - name: items
                 components:

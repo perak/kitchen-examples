@@ -74,6 +74,10 @@
 								}
 							]
 						}
+					],
+
+					"imports": [
+						"import {ConfirmationDialog} from \"CLIENT_COMPONENTS_DIR/confirmation_dialog/confirmation_dialog.jsx\";"
 					]
 				}
 			],

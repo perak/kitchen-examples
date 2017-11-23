@@ -44,6 +44,10 @@ application:
                 query_name: gallery_empty
                 submit_route: home
                 cancel_route: home
+        imports:
+          - >-
+            import {ConfirmationDialog} from
+            "CLIENT_COMPONENTS_DIR/confirmation_dialog/confirmation_dialog.jsx";
     components:
       - name: main_menu
         type: menu
