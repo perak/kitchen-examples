@@ -26,14 +26,17 @@ application:
     - name: fruit_list
       collection: fruits
       filter: '{}'
+      options: '{}'
     - name: fruits_null
       collection: fruits
       find_one: true
       filter: '{"_id":null}'
+      options: '{}'
     - name: fruit
       collection: fruits
       find_one: true
       filter: '{"_id":":fruitId"}'
+      options: '{}'
   free_zone:
     type: zone
     components:
@@ -74,7 +77,6 @@ application:
             query_name: fruit_list
             insert_route: fruits.insert
             details_route: fruits.details
-            edit_route: fruits.update
             details_route_params:
               - name: fruitId
                 value: this._id
@@ -107,26 +109,15 @@ application:
                 submit_route: fruits
                 cancel_route: fruits
                 object_type: form
-          - name: update
-            type: page
-            components:
-              - name: form
-                type: form
-                title: Edit Fruit
-                query_name: fruit
-                mode: update
-                submit_route: fruits
-                cancel_route: fruits
-                object_type: form
-            route_params:
-              - fruitId
   copy_files:
     - source_content: |
         {
-            "bigchain": {
+            "bigchaindb": {
                 "url": "http://localhost:9984/api/v1/",
-                "publicKey": "HyBFv87h28JuVE1vT3f1EWBadnza7gg2pG298LWnhy2P",
-                "privateKey": "6KWcJUaf3mAd3yEoxyAfECxeCKYrL4ZEq2e7GDEW4kEQ"
+                "eventsUrl": "ws://0.0.0.0:9985/api/v1/streams/valid_transactions",
+                "appId": "",
+                "appKey": "",
+                "namespace": "example-bigchaindb"
             }
         }
       dest: SETTINGS_DIR/settings.json

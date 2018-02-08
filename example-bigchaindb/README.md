@@ -15,7 +15,7 @@ meteor --settings ./settings.json
 
 
 
-**Note** BigchainDB url and keys are set by default assuming you have local copy of bigchaindb running. If you want to connect to public BigchainDB (for example "IPDB") then modify generated `settings.json`
+**Note** BigchainDB url is set by default assuming you have local copy of bigchaindb running. If you want to connect to public BigchainDB TestNet then modify generated `settings.json`
 
 
 **JSON** and **YAML** files are the same example in different formats.
