@@ -326,10 +326,10 @@
 									"title": "Users",
 									"text_if_empty": "No users yet",
 									"query_name": "admin_users",
+									"page_size": 20,
 
 									"fields": [
 										{ "name": "profile.name", "title": "Name"},
-										{ "name": "profile.email", "title": "E-mail" },
 										{ "name": "roles", "title": "Role" }
 									],
 
@@ -359,7 +359,6 @@
 											"query_name": "admin_user",
 											"fields": [
 												{ "name": "profile.name", "title": "Name"},
-												{ "name": "profile.email", "title": "E-mail", "type": "email" },
 												{ "name": "roles", "title": "Role" }
 											],
 											"close_route": "admin.users",
@@ -380,7 +379,7 @@
 											"query_name": "users_null",
 											"fields": [
 												{ "name": "profile.name", "title": "Name", "required": true },
-												{ "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
+												{ "name": "email", "title": "E-mail", "type": "email", "required": true },
 												{ "name": "password", "title": "Password", "input": "password", "required": true }
 											]
 										}
@@ -400,7 +399,6 @@
 											"query_name": "admin_user",
 											"fields": [
 												{ "name": "profile.name", "title": "Name", "required": true },
-												{ "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
 												{
 													"name": "roles",
 													"type": "array",
@@ -448,8 +446,7 @@
 									"submit_route": "user_settings.profile",
 									"query_name": "current_user_data",
 									"fields": [
-										{ "name": "profile.name", "title": "Name", "required": true },
-										{ "name": "profile.email", "title": "E-mail", "type": "email", "required": true }
+										{ "name": "profile.name", "title": "Name", "required": true }
 									]
 								}
 							]

@@ -1,353 +1,212 @@
-{
-  "application": {
-    "title": "Example application",
-    "theme": "bootswatch-flatly",
-    "roles": [
-      "admin",
-      "user"
-    ],
-    "default_role": "user",
-    "send_verification_email": true,
-    "collections": [],
-    "queries": [
-      {
-        "name": "admin_users",
-        "collection": "users",
-        "filter": "{}"
-      },
-      {
-        "name": "admin_user",
-        "collection": "users",
-        "filter": "{ \"_id\": \":userId\" }",
-        "find_one": true
-      },
-      {
-        "name": "users_null",
-        "collection": "users",
-        "filter": "{ \"_id\": null }",
-        "find_one": true
-      },
-      {
-        "name": "current_user_data",
-        "collection": "users",
-        "filter": "{ \"_id\": \"Meteor.userId()\" }",
-        "find_one": true
-      }
-    ],
-    "free_zone": {
-      "pages": [
-        {
-          "name": "home_public",
-          "title": "",
-          "components": [
-            {
-              "name": "home_jumbotron",
-              "title": "Example application",
-              "type": "jumbotron",
-              "text": "<b>This is example application built with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">meteor-kitchen</a> code generator without manual coding.</b><br />It demonstrates simple application with user account system and admin panel.<br />Source code (input file for generator) is <a href=\"https://github.com/perak/kitchen-examples/tree/master/example-admin\" target=\"_blank\">here</a>.",
-              "button_title": "Continue &raquo;",
-              "button_route": "login"
-            },
-            {
-              "name": "home_cms_box",
-              "type": "editable_content",
-              "content_name": "home_cms_box",
-              "text_if_empty": "Micro CMS - Admin can change this text"
-            }
-          ]
-        }
-      ]
-    },
-    "public_zone": {
-      "default_route": "home_public",
-      "pages": [
-        {
-          "name": "login",
-          "template": "login"
-        },
-        {
-          "name": "register",
-          "template": "register"
-        },
-        {
-          "name": "verify_email",
-          "template": "verify_email",
-          "route_params": [
-            "verifyEmailToken"
-          ]
-        },
-        {
-          "name": "forgot_password",
-          "template": "forgot_password"
-        },
-        {
-          "name": "reset_password",
-          "template": "reset_password",
-          "route_params": [
-            "resetPasswordToken"
-          ]
-        }
-      ],
-      "components": [
-        {
-          "name": "left_menu",
-          "type": "menu",
-          "items": [
-            {
-              "title": "Home",
-              "route": "home_public"
-            }
-          ]
-        },
-        {
-          "name": "right_menu",
-          "type": "menu",
-          "items": [
-            {
-              "title": "Register",
-              "route": "register"
-            },
-            {
-              "title": "Login",
-              "route": "login"
-            }
-          ]
-        }
-      ]
-    },
-    "private_zone": {
-      "pages": [
-        {
-          "name": "home_private",
-          "title": "Welcome {{userFullName}}!"
-        },
-        {
-          "name": "admin",
-          "roles": [
-            "admin"
-          ],
-          "pages": [
-            {
-              "name": "users",
-              "components": [
-                {
-                  "name": "view",
-                  "type": "data_view",
-                  "title": "Users",
-                  "text_if_empty": "No users yet",
-                  "query_name": "admin_users",
-                  "query_params": [],
-                  "fields": [
-                    {
-                      "name": "profile.name",
-                      "title": "Name"
-                    },
-                    {
-                      "name": "roles",
-                      "title": "Role"
-                    }
-                  ],
-                  "edit_route": "admin.users.edit",
-                  "edit_route_params": [
-                    {
-                      "name": "userId",
-                      "value": "this._id"
-                    }
-                  ],
-                  "details_route": "admin.users.details",
-                  "details_route_params": [
-                    {
-                      "name": "userId",
-                      "value": "this._id"
-                    }
-                  ]
-                }
-              ],
-              "pages": [
-                {
-                  "name": "details",
-                  "route_params": [
-                    "userId"
-                  ],
-                  "components": [
-                    {
-                      "name": "details_form",
-                      "type": "form",
-                      "mode": "read_only",
-                      "title": "User details",
-                      "query_name": "admin_user",
-                      "query_params": [],
-                      "fields": [
-                        {
-                          "name": "profile.name",
-                          "title": "Name"
-                        },
-                        {
-                          "name": "roles",
-                          "title": "Role"
-                        }
-                      ],
-                      "close_route": "admin.users",
-                      "back_route": "admin.users"
-                    }
-                  ]
-                },
-                {
-                  "name": "edit",
-                  "route_params": [
-                    "userId"
-                  ],
-                  "components": [
-                    {
-                      "name": "edit_form",
-                      "type": "form",
-                      "mode": "update",
-                      "title": "Edit user",
-                      "submit_route": "admin.users",
-                      "cancel_route": "admin.users",
-                      "query_name": "admin_user",
-                      "query_params": [],
-                      "fields": [
-                        {
-                          "name": "profile.name",
-                          "title": "Name",
-                          "required": true
-                        },
-                        {
-                          "name": "roles",
-                          "type": "array",
-                          "title": "Role",
-                          "input": "radio",
-                          "input_items": [
-                            {
-                              "value": "user",
-                              "title": "User"
-                            },
-                            {
-                              "value": "admin",
-                              "title": "Admin"
-                            },
-                            {
-                              "value": "blocked",
-                              "title": "Blocked"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "components": [
-            {
-              "name": "side_menu",
-              "type": "menu",
-              "class": "nav nav-stacked nav-pills",
-              "items": [
-                {
-                  "title": "Users",
-                  "route": "admin.users"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "user_settings",
-          "roles": [
-            "user",
-            "admin"
-          ],
-          "pages": [
-            {
-              "name": "profile",
-              "components": [
-                {
-                  "name": "edit_form",
-                  "type": "form",
-                  "mode": "update",
-                  "title": "Edit your profile",
-                  "submit_route": "user_settings.profile",
-                  "query_name": "current_user_data",
-                  "query_params": [],
-                  "fields": [
-                    {
-                      "name": "profile.name",
-                      "title": "Name",
-                      "required": true
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "name": "change_pass",
-              "template": "change_pass"
-            }
-          ],
-          "components": [
-            {
-              "name": "side_menu",
-              "type": "menu",
-              "class": "nav nav-stacked nav-pills",
-              "items": [
-                {
-                  "title": "Profile",
-                  "route": "user_settings.profile"
-                },
-                {
-                  "title": "Change password",
-                  "route": "user_settings.change_pass"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "logout",
-          "template": "logout"
-        }
-      ],
-      "components": [
-        {
-          "name": "left_menu",
-          "type": "menu",
-          "items": [
-            {
-              "title": "Home",
-              "route": "home_private",
-              "icon_class": "fa fa-home"
-            }
-          ]
-        },
-        {
-          "name": "right_menu",
-          "type": "menu",
-          "items": [
-            {
-              "title": "Admin",
-              "route": "admin",
-              "icon_class": "fa fa-wrench"
-            },
-            {
-              "title": "{{userEmail}}",
-              "items": [
-                {
-                  "title": "Settings",
-                  "route": "user_settings"
-                },
-                {
-                  "title": "Logout",
-                  "route": "logout"
-                }
-              ],
-              "icon_class": "fa fa-cog"
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
+application:
+  title: Example application
+  theme: bootswatch-flatly
+  roles:
+    - admin
+    - user
+  default_role: user
+  send_verification_email: true
+  collections: []
+  queries:
+    - name: admin_users
+      collection: users
+      filter: '{}'
+    - name: admin_user
+      collection: users
+      filter: '{ "_id": ":userId" }'
+      find_one: true
+    - name: users_null
+      collection: users
+      filter: '{ "_id": null }'
+      find_one: true
+    - name: current_user_data
+      collection: users
+      filter: '{ "_id": "Meteor.userId()" }'
+      find_one: true
+  free_zone:
+    pages:
+      - name: home_public
+        title: ''
+        components:
+          - name: home_jumbotron
+            title: Example application
+            type: jumbotron
+            text: >-
+              <b>This is example application built with <a
+              href="http://www.meteorkitchen.com"
+              target="_blank">meteor-kitchen</a> code generator without manual
+              coding.</b><br />It demonstrates simple application with user
+              account system and admin panel.<br />Source code (input file for
+              generator) is <a
+              href="https://github.com/perak/kitchen-examples/tree/master/example-admin"
+              target="_blank">here</a>.
+            button_title: Continue &raquo;
+            button_route: login
+          - name: home_cms_box
+            type: cms_content
+            content_name: home_cms_box
+            text_if_empty: Micro CMS - Admin can add content here
+  public_zone:
+    default_route: home_public
+    pages:
+      - name: login
+        template: login
+      - name: register
+        template: register
+      - name: verify_email
+        template: verify_email
+        route_params:
+          - verifyEmailToken
+      - name: forgot_password
+        template: forgot_password
+      - name: reset_password
+        template: reset_password
+        route_params:
+          - resetPasswordToken
+    components:
+      - name: left_menu
+        type: menu
+        items:
+          - title: Home
+            route: home_public
+      - name: right_menu
+        type: menu
+        items:
+          - title: Register
+            route: register
+          - title: Login
+            route: login
+  private_zone:
+    pages:
+      - name: home_private
+        title: 'Welcome {{userFullName}}!'
+      - name: admin
+        roles:
+          - admin
+        pages:
+          - name: users
+            components:
+              - name: view
+                type: data_view
+                title: Users
+                text_if_empty: No users yet
+                query_name: admin_users
+                query_params: []
+                page_size: 20
+                fields:
+                  - name: profile.name
+                    title: Name
+                  - name: roles
+                    title: Role
+                edit_route: admin.users.edit
+                edit_route_params:
+                  - name: userId
+                    value: this._id
+                details_route: admin.users.details
+                details_route_params:
+                  - name: userId
+                    value: this._id
+            pages:
+              - name: details
+                route_params:
+                  - userId
+                components:
+                  - name: details_form
+                    type: form
+                    mode: read_only
+                    title: User details
+                    query_name: admin_user
+                    query_params: []
+                    fields:
+                      - name: profile.name
+                        title: Name
+                      - name: roles
+                        title: Role
+                    close_route: admin.users
+                    back_route: admin.users
+              - name: edit
+                route_params:
+                  - userId
+                components:
+                  - name: edit_form
+                    type: form
+                    mode: update
+                    title: Edit user
+                    submit_route: admin.users
+                    cancel_route: admin.users
+                    query_name: admin_user
+                    query_params: []
+                    fields:
+                      - name: profile.name
+                        title: Name
+                        required: true
+                      - name: roles
+                        type: array
+                        title: Role
+                        input: radio
+                        input_items:
+                          - value: user
+                            title: User
+                          - value: admin
+                            title: Admin
+                          - value: blocked
+                            title: Blocked
+        components:
+          - name: side_menu
+            type: menu
+            class: nav nav-stacked nav-pills
+            items:
+              - title: Users
+                route: admin.users
+      - name: user_settings
+        roles:
+          - user
+          - admin
+        pages:
+          - name: profile
+            components:
+              - name: edit_form
+                type: form
+                mode: update
+                title: Edit your profile
+                submit_route: user_settings.profile
+                query_name: current_user_data
+                query_params: []
+                fields:
+                  - name: profile.name
+                    title: Name
+                    required: true
+          - name: change_pass
+            template: change_pass
+        components:
+          - name: side_menu
+            type: menu
+            class: nav nav-stacked nav-pills
+            items:
+              - title: Profile
+                route: user_settings.profile
+              - title: Change password
+                route: user_settings.change_pass
+      - name: logout
+        template: logout
+    components:
+      - name: left_menu
+        type: menu
+        items:
+          - title: Home
+            route: home_private
+            icon_class: fa fa-home
+      - name: right_menu
+        type: menu
+        items:
+          - title: Admin
+            route: admin
+            icon_class: fa fa-wrench
+          - title: '{{userEmail}}'
+            items:
+              - title: Settings
+                route: user_settings
+              - title: Logout
+                route: logout
+            icon_class: fa fa-cog
+

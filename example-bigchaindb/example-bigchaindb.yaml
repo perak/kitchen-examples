@@ -75,6 +75,7 @@ application:
             type: data_view
             title: Fruits
             query_name: fruit_list
+            page_size: 20
             insert_route: fruits.insert
             details_route: fruits.details
             details_route_params:

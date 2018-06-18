@@ -21,7 +21,7 @@ application:
           input: textarea
           exportable: true
           show_in_dataview: false
-        - name: totalAmount
+        - name: invoiced
           title: Invoiced
           type: float
           show_in_insert_form: false
@@ -34,6 +34,7 @@ application:
         - owner
       roles_allowed_to_delete:
         - owner
+      before_insert_code: if(!doc.invoiced) doc.invoiced = 0;
     - name: invoices
       fields:
         - name: invoiceNumber
@@ -82,6 +83,18 @@ application:
       roles_allowed_to_delete:
         - owner
       before_insert_code: if(!doc.totalAmount) doc.totalAmount = 0;
+      after_insert_code: >-
+        var sum = 0; Invoices.find({ customerId: doc.customerId
+        }).map(function(item) { sum += item.totalAmount; }); Customers.update({
+        _id: doc.customerId }, { $set: { invoiced: sum }});
+      after_update_code: >-
+        var sum = 0; Invoices.find({ customerId: doc.customerId
+        }).map(function(item) { sum += item.totalAmount; }); Customers.update({
+        _id: doc.customerId }, { $set: { invoiced: sum }});
+      after_remove_code: >-
+        var sum = 0; Invoices.find({ customerId: doc.customerId
+        }).map(function(item) { sum += item.totalAmount; }); Customers.update({
+        _id: doc.customerId }, { $set: { invoiced: sum }});
     - name: invoice_items
       fields:
         - name: description
@@ -134,13 +147,7 @@ application:
     - name: customer_list
       collection: customers
       filter: '{}'
-      options: >-
-        { "transform": "function(doc) { var sum = 0; Invoices.find({ customerId:
-        doc._id }).map(function(item) { if(item.totalAmount) sum +=
-        item.totalAmount; }); doc.totalAmount = sum; return doc; }", "sort":
-        ["name"] }
-      related_queries:
-        - name: invoice_list
+      options: '{  "sort": { "name": 1 } }'
     - name: customers_empty
       collection: customers
       filter: '{"_id": null}'
@@ -149,23 +156,16 @@ application:
       collection: customers
       find_one: true
       filter: '{ "_id": ":customerId" }'
-      options: >-
-        { "transform": "function(doc) { var sum = 0; Invoices.find({ customerId:
-        doc._id }).map(function(item) { sum += item.totalAmount; });
-        doc.totalAmount = sum; return doc; }" }
-      related_queries:
-        - name: invoice_list
+      options: '{}'
     - name: invoice_list
       collection: invoices
       filter: {}
-      options: '{ "sort": [[ "invoiceNumber", "desc"]] }'
+      options: '{ "sort": { "invoiceNumber": -1 } }'
     - name: invoices_empty
       collection: invoices
       filter: '{ "_id": null }'
       options: '{}'
       find_one: true
-      related_queries:
-        - name: invoice_list
     - name: invoice_details
       collection: invoices
       filter: '{ "_id": ":invoiceId" }'
@@ -244,6 +244,7 @@ application:
             title: Customers
             text_if_empty: 'No customers :('
             query_name: customer_list
+            page_size: 20
             insert_route: customers.insert
             edit_route: customers.edit
             edit_route_params:
@@ -292,6 +293,7 @@ application:
             title: Invoices
             text_if_empty: 'No invoices :('
             query_name: invoice_list
+            page_size: 20
             insert_route: invoices.insert
             edit_route: invoices.edit
             edit_route_params:
@@ -309,12 +311,6 @@ application:
                 mode: insert
                 title: New invoice
                 query_name: invoices_empty
-                helpers_code: >-
-                  'nextInvoiceNumber': function() { var max = 0; var
-                  invoiceNumbers = Invoices.find({}, { fields: { invoiceNumber:
-                  1 }}).fetch(); _.each(invoiceNumbers, function(doc) { var
-                  intNum = parseInt(doc.invoiceNumber); if(!isNaN(intNum) &&
-                  intNum > max) max = intNum; }); return max + 1; }
                 submit_route: invoices.details
                 submit_route_params:
                   - name: invoiceId
@@ -340,6 +336,7 @@ application:
                     type: data_view
                     text_if_empty: No items
                     query_name: invoice_items
+                    page_size: 20
                     insert_button_title: Add item
                     insert_route: invoices.details.insert
                     insert_route_params:
@@ -410,10 +407,6 @@ application:
                 fields:
                   - name: profile.name
                     title: Name
-                    required: true
-                  - name: profile.email
-                    title: E-mail
-                    type: email
                     required: true
                   - name: profile.facebook
                     title: Facebook URL

@@ -138,10 +138,6 @@ application:
                     title: Name
                     required: true
                     type: string
-                  - name: profile.email
-                    title: E-mail
-                    type: email
-                    required: true
                   - name: profile.facebook
                     title: Facebook URL
                     type: string

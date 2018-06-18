@@ -12,13 +12,15 @@
 					{ "name": "phone", "title": "Phone", "default": "-", "exportable": true },
 					{ "name": "email", "title": "E-mail", "type": "email", "exportable": true },
 					{ "name": "note", "title": "Note", "input": "textarea", "exportable": true, "show_in_dataview": false },
-					{ "name": "totalAmount", "title": "Invoiced", "type": "float", "show_in_insert_form": false, "show_in_update_form": false, "exportable": true }
+					{ "name": "invoiced", "title": "Invoiced", "type": "float", "show_in_insert_form": false, "show_in_update_form": false, "exportable": true }
 				],
 				"owner_field": "ownerId",
 
 				"roles_allowed_to_read": ["owner"],
 				"roles_allowed_to_update": ["owner"],
-				"roles_allowed_to_delete": ["owner"]
+				"roles_allowed_to_delete": ["owner"],
+
+				"before_insert_code": "if(!doc.invoiced) doc.invoiced = 0;"
 			},
 
 			{
@@ -67,7 +69,11 @@
 				"roles_allowed_to_update": ["owner"],
 				"roles_allowed_to_delete": ["owner"],
 
-				"before_insert_code": "if(!doc.totalAmount) doc.totalAmount = 0;"
+				"before_insert_code": "if(!doc.totalAmount) doc.totalAmount = 0;",
+
+				"after_insert_code": "var sum = 0; Invoices.find({ customerId: doc.customerId }).map(function(item) { sum += item.totalAmount; }); Customers.update({ _id: doc.customerId }, { $set: { invoiced: sum }});",
+				"after_update_code": "var sum = 0; Invoices.find({ customerId: doc.customerId }).map(function(item) { sum += item.totalAmount; }); Customers.update({ _id: doc.customerId }, { $set: { invoiced: sum }});",
+				"after_remove_code": "var sum = 0; Invoices.find({ customerId: doc.customerId }).map(function(item) { sum += item.totalAmount; }); Customers.update({ _id: doc.customerId }, { $set: { invoiced: sum }});"
 			},
 
 			{
@@ -101,10 +107,7 @@
 				"name": "customer_list",
 				"collection": "customers",
 				"filter": "{}",
-				"options": "{ \"transform\": \"function(doc) { var sum = 0; Invoices.find({ customerId: doc._id }).map(function(item) { if(item.totalAmount) sum += item.totalAmount; }); doc.totalAmount = sum; return doc; }\", \"sort\": [\"name\"] }",
-				"related_queries": [
-					{ "name": "invoice_list" }
-				]
+				"options": "{  \"sort\": { \"name\": 1 } }"
 			},
 			{
 				"name": "customers_empty",
@@ -117,26 +120,20 @@
 				"collection": "customers",
 				"find_one": true,
 				"filter": "{ \"_id\": \":customerId\" }",
-				"options": "{ \"transform\": \"function(doc) { var sum = 0; Invoices.find({ customerId: doc._id }).map(function(item) { sum += item.totalAmount; }); doc.totalAmount = sum; return doc; }\" }",
-				"related_queries": [
-					{ "name": "invoice_list" }
-				]
+				"options": "{}"
 			},
 			{
 				"name": "invoice_list",
 				"collection": "invoices",
 				"filter": {},
-				"options": "{ \"sort\": [[ \"invoiceNumber\", \"desc\"]] }"
+				"options": "{ \"sort\": { \"invoiceNumber\": -1 } }"
 			},
 			{
 				"name": "invoices_empty",
 				"collection": "invoices",
 				"filter": "{ \"_id\": null }",
 				"options": "{}",
-				"find_one": true,
-				"related_queries": [
-					{ "name": "invoice_list" }
-				]
+				"find_one": true
 			},
 			{
 				"name": "invoice_details",
@@ -232,6 +229,7 @@
 							"title": "Customers",
 							"text_if_empty": "No customers :(",
 							"query_name": "customer_list",
+							"page_size": 20,
 							"insert_route": "customers.insert",
 							"edit_route": "customers.edit",
 							"edit_route_params": [
@@ -302,6 +300,7 @@
 							"title": "Invoices",
 							"text_if_empty": "No invoices :(",
 							"query_name": "invoice_list",
+							"page_size": 20,
 							"insert_route": "invoices.insert",
 							"edit_route": "invoices.edit",
 							"edit_route_params": [
@@ -325,8 +324,6 @@
 									"title": "New invoice",
 
 									"query_name": "invoices_empty",
-
-									"helpers_code": "'nextInvoiceNumber': function() { var max = 0; var invoiceNumbers = Invoices.find({}, { fields: { invoiceNumber: 1 }}).fetch(); _.each(invoiceNumbers, function(doc) { var intNum = parseInt(doc.invoiceNumber); if(!isNaN(intNum) && intNum > max) max = intNum; }); return max + 1; }",
 
 									"submit_route": "invoices.details",
 									"submit_route_params": [
@@ -363,6 +360,7 @@
 											"type": "data_view",
 											"text_if_empty": "No items",
 											"query_name": "invoice_items",
+											"page_size": 20,
 											"insert_button_title": "Add item",
 											"insert_route": "invoices.details.insert",
 											"insert_route_params": [
@@ -460,7 +458,6 @@
 									"query_name": "current_user_data",
 									"fields": [
 										{ "name": "profile.name", "title": "Name", "required": true },
-										{ "name": "profile.email", "title": "E-mail", "type": "email", "required": true },
 										{ "name": "profile.facebook", "title": "Facebook URL" },
 										{ "name": "profile.google", "title": "Google+ URL" },
 										{ "name": "profile.twitter", "title": "Twitter ID" },

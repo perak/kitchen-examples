@@ -11,12 +11,16 @@ application:
           exportable: true
         - name: modifiedAt
           title: Modified
+          type: date
+          format: 'MM/DD/YYYY hh:mm:ss'
           exportable: true
   queries:
     - name: sensors
       collection: sensors
       filter: '{}'
       options: '{}'
+  server_startup_imports:
+    - 'import {Sensors} from "BOTH_COLLECTIONS_DIR/sensors.js";'
   server_startup_code: 'Sensors.mqttConnect(''mqtt://test.mosquitto.org'', [''revspace/sensors/#'']);'
   free_zone:
     pages:

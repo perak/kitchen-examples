@@ -75,6 +75,7 @@
 							"name": "view",
 							"type": "data_view",
 							"title": "Customers",
+							"page_size": 10,
 							"text_if_empty": "No customers :(",
 
 							"query_name": "customers",

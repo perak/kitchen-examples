@@ -53,12 +53,12 @@
 						},
 						{
 							"name": "home_cms_box",
-							"type": "editable_content",
+							"type": "cms_content",
 							"content_name": "home_cms_box",
-							"text_if_empty": "Micro CMS - Admin can change this text"
+							"text_if_empty": "Micro CMS - Admin can add content here"
 						}
 					]
-				},
+				}
 			]
 		},
 
@@ -111,9 +111,10 @@
 									"text_if_empty": "No users yet",
 									"query_name": "admin_users",
 									"query_params": [],
+									"page_size": 20,
 
 									"fields": [
-										{ "name": "profile.name", "title": "Name"},
+										{ "name": "profile.name", "title": "Name" },
 										{ "name": "roles", "title": "Role" }
 									],
 

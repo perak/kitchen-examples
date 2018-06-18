@@ -256,11 +256,10 @@ application:
                 title: Users
                 text_if_empty: No users yet
                 query_name: admin_users
+                page_size: 20
                 fields:
                   - name: profile.name
                     title: Name
-                  - name: profile.email
-                    title: E-mail
                   - name: roles
                     title: Role
                 insert_route: admin.users.insert
@@ -285,9 +284,6 @@ application:
                     fields:
                       - name: profile.name
                         title: Name
-                      - name: profile.email
-                        title: E-mail
-                        type: email
                       - name: roles
                         title: Role
                     close_route: admin.users
@@ -305,7 +301,7 @@ application:
                       - name: profile.name
                         title: Name
                         required: true
-                      - name: profile.email
+                      - name: email
                         title: E-mail
                         type: email
                         required: true
@@ -327,10 +323,6 @@ application:
                     fields:
                       - name: profile.name
                         title: Name
-                        required: true
-                      - name: profile.email
-                        title: E-mail
-                        type: email
                         required: true
                       - name: roles
                         type: array
@@ -366,10 +358,6 @@ application:
                 fields:
                   - name: profile.name
                     title: Name
-                    required: true
-                  - name: profile.email
-                    title: E-mail
-                    type: email
                     required: true
           - name: change_pass
             template: change_pass

@@ -8,7 +8,7 @@
 				"fields": [
 					{ "name": "topic", "title": "Topic", "exportable": true },
 					{ "name": "message", "title": "Message", "exportable": true },
-					{ "name": "modifiedAt", "title": "Modified", "exportable": true }
+					{ "name": "modifiedAt", "title": "Modified", "type": "date", "format": "MM/DD/YYYY hh:mm:ss", "exportable": true }
 				]
 			}
 		],
@@ -22,6 +22,9 @@
 			}
 		],
 
+        "server_startup_imports": [
+        	"import {Sensors} from \"BOTH_COLLECTIONS_DIR/sensors.js\";"
+        ],
 		"server_startup_code": "Sensors.mqttConnect('mqtt://test.mosquitto.org', ['revspace/sensors/#']);",
 
 		"free_zone": {
