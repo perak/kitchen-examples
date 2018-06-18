@@ -3,18 +3,18 @@ Template.TEMPLATE_NAME.events({
 		event.preventDefault();
       
 		// read params from input box
-		var params = template.find("input[name='params']").value;
+		var params = $("input[name='params']").val();
 
 		// construct URL with params
 		var url = "http://swapi.co/api/" + params;
 
 		// animate loading
-		$(template.find(".client-request")).button("loading");
+		$(".client-request").button("loading");
 
 		// HTTP call
 		HTTP.call("GET", url, function(err, res){
 			// stop animating loading
-			$(template.find(".client-request")).button("reset");
+			$(".client-request").button("reset");
 
 			// process result
 			if(err){
@@ -22,7 +22,7 @@ Template.TEMPLATE_NAME.events({
 				alert(err.reason);
 			} else {
 				// success: show result
-				$(template.find(".result")).text("\n" + JSON.stringify(JSON.parse(res.content), null, '\t') + "\n");
+				$(".result").text("\n" + JSON.stringify(JSON.parse(res.content), null, '\t') + "\n");
 			}
 		});
 
@@ -33,15 +33,15 @@ Template.TEMPLATE_NAME.events({
 		event.preventDefault();
       
 		// read params from input box
-		var params = template.find("input[name='params']").value;
+		var params = $("input[name='params']").val();
 
 		// animate loading
-		$(template.find(".server-request")).button("loading");
+		$(".server-request").button("loading");
 
 		// HTTP call
 		Meteor.call("starWars", params, function(err, res){
 			// stop animating loading
-			$(template.find(".server-request")).button("reset");
+			$(".server-request").button("reset");
 
 			// process result
 			if(err){
@@ -49,7 +49,7 @@ Template.TEMPLATE_NAME.events({
 				alert(err.reason);
 			} else {
 				// success: show result
-				$(template.find(".result")).text("\n" + JSON.stringify(res, null, '\t') + "\n");
+				$(".result").text("\n" + JSON.stringify(res, null, '\t') + "\n");
 			}
 		});
 
