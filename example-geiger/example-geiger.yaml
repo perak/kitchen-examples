@@ -44,7 +44,6 @@ application:
             chart_type: spline
             value_field: message
             object_type: chart
-        js: "Template.TEMPLATE_NAME.helpers({\n\t\"geigerChart\": function() {\n\t\tvar cols = [];\n\t\tvar col = [\"Radiation\"];\n\t\tvar data = _.pluck(Sensors.find({ topic: \"revspace/sensors/geiger\" }).fetch(), \"message\");\n\t\t_.each(data, function(g) {\n\t\t\tcol.push(parseInt(g));\n\t\t});\n\t\tcols.push(col);\n\t\treturn {\n\t\t\tdata: {\n\t\t\t\tcolumns: cols,\n\t\t\t\ttype: 'spline'\n\t\t\t}\n\t\t};\n\t}\n});\n"
         text: >-
           Showing geiger sensor from <a href="https://revspace.nl"
           target="_blank">RevSpace</a> in real-time. Server is connected to <a
